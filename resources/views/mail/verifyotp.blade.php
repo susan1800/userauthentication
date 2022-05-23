@@ -1,5 +1,5 @@
 <style>
-
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 * {
 	box-sizing: border-box;
@@ -182,30 +182,31 @@ body {
 
 
 
-
+@php
+$email=$_GET['email'];
+$otp=$_GET['makeotp'];
+@endphp
 
 
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
-			<form class="login" action="/register"  method="post">
+			<form class="login" method="post" action="{{route('checkotp')}}">
 				@csrf
-            <div class="login__field">
-					<i class="login__icon fas fa-user"></i>
-					<input type="text" class="login__input" name="name" placeholder="User name " value="{{old('value')}}">
-				</div>
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-					<input type="email" class="login__input" name="email" placeholder="User Email">
+					<input type="number" class="login__input" name="inputotp" placeholder="Otp code">
+                    <input type="hidden" class="login__input" name="otp" value="{{$otp}}">
+                    <input type="hidden" class="login__input" name="email" value="{{$email}}">
 				</div>
-				<div class="login__field">
-					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" name="password" placeholder="Password">
-				</div>
-				<input type="submit" value="submit" class="button login__submit"	>			
+				
+				<button class="button login__submit">
+					<span class="button__text">verify</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
 			</form>
-			
-				<h3><a href="{{route('signin')}}">log in </a></h3>
+			<p><a href="{{route('sendotp' , $email)}}">Resend code</a>
+				
 				
 		</div>
 		<div class="screen__background">
