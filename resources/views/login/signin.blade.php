@@ -4,7 +4,7 @@
 <div class="login-container">
   <section class="login" id="login">
     <header>
-      <h2>Application Name</h2>
+      <h3>Cosmos College</h3>
       <h4>Login</h4>
     </header>
     <form class="login-form" action="{{route('login')}}" method="post">
