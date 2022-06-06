@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 * {
@@ -214,4 +214,215 @@ body {
 			<span class="screen__background__shape screen__background__shape1"></span>
 		</div>		
 	</div>
-</div>
+</div> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<style>
+		html,
+body {
+  height: 100%;
+}
+
+body {
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  background: linear-gradient(blue, white), url('http://media-ict.nl/assets/img/bg.jpg') no-repeat center center fixed;
+  /* rgba(0, 0, 0, 0.5) */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+a:focus {
+  outline: none;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: none;
+}
+/** Custom styles **/
+
+.vis-hidden {
+  visibility: hidden !important;
+}
+
+a {
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+}
+
+#mainWrap {
+  min-height: 100%;
+  overflow: auto;
+  padding-bottom: 96px;
+}
+
+
+#xlogin {
+  border-radius: 25px;
+  border: 0px dotted white;
+  padding: 20px;
+  background-color: purple;
+  /* rgba(100, 100, 100, 0.7) */
+  width: 480px;
+  padding: 20px 40px;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#xlogin h1 {
+  text-align: center;
+  font-weight: 700;
+  margin: 5px 0 15px;
+}
+
+#xlogin h3 {
+  text-align: center;
+  font-size: 18px;
+  color: #bbb;
+  margin: 0 0 20px;
+}
+
+#xlogin .input-group-addon {
+  border: 0 none;
+}
+
+#xlogin .form-control {
+  border: 0 none;
+}
+
+#xlogin .form-control:focus {
+  box-shadow: none;
+}
+
+#xlogin .formSubmit {
+  margin-bottom: 25px;
+}
+
+#xlogin .submitWrap {
+  text-align: right;
+}
+
+#xlogin .formNotice {
+  margin: 0;
+  font-size: 13px;
+}
+
+#xlogin .formNotice span {
+  cursor: pointer;
+  color: #428BCA;
+}
+
+#xlogin .formNotice2 {
+  margin: 0;
+  font-size: 13px;
+}
+
+#xlogin .formNotice2 span {
+  cursor: pointer;
+  color: #428BCA;
+}
+
+#xlogin .formNotice span:hover,
+#xlogin .formNotice span:focus {
+  color: #2A6496;
+  text-decoration: underline;
+}
+
+#xlogin #regForm {
+  display: none;
+}
+	</style>
+</head>
+<body>
+<div id="mainWrap">
+			<div id="xlogin" >
+<h1><i class="fa fa-lock"></i> Please Login</h1>
+				<h3> Please login or register now!</h3>
+				
+				<form action="#" id="logForm" method="get" class="form-horizontal">
+					<div class="form-group">
+						<div class="col-xs-12">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+								<input name="username" type="text" class="form-control input-lg" placeholder="Username" autocomplete="off">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-12">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+								<input name="password" type="password" class="form-control input-lg" placeholder="Password" autocomplete="off">
+							</div>
+						</div>
+					</div>
+					<div class="form-group formSubmit">
+						<div class="col-sm-7">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" checked autocomplete="off"> Keep me logged in
+								</label>
+							</div>
+						</div>
+						<div class="col-sm-5 submitWrap">
+							
+							<input id="login" name="submit" class="btn btn-primary btn-lg" type="submit" value="Login Now!"/>
+						</div>
+					</div>
+
+<hr>
+
+					<div class="form-group formNotice">
+						<div class="col-xs-12">
+						
+							<h3 class="text-center">    Don't have a account?   <i class="fa fa-chevron-right "></i>    <span> <a href="{{route('signup')}}">Sign Up</a></span></h3>
+					
+				
+				
+						</div>
+					</div>
+					
+					
+				</form>
+
+</body>
+<script>
+			$(document).ready(function() {
+      
+	  $("#xlogin").hide();
+	  $("#xlogin").fadeIn(600);
+				
+				$('.formNotice span').click(function() {
+					$("#logForm").hide();
+					$("#regForm").fadeIn(500);
+				});
+  
+   
+  $('.formNotice2 span').click(function() {
+	
+		$("#regForm").hide();
+					$("#logForm").slideDown(600);
+					
+				});
+				
+					
+			});
+</script>
+</html>
