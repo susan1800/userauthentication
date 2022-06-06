@@ -16,11 +16,13 @@ class LoginController extends Controller
             'email'    =>  'required',
             'password' =>  'required',
         ]);
-        
+       
         $user =User::where('email' , '=' , $request->email)->get();
+        
         if(sizeof($user) < 1){
             return view('login.signup');
         }
+        
         else{
 
             $returncheckpassword = $this->checkpassword($request->password , $user[0]->password);

@@ -11,13 +11,14 @@ use Hash;
 class RegisterController extends Controller
 {
     public function register(Request $request){
+       
         $this->validate($request, [
             'name'      =>  'required|max:191',
             'email'    =>  'required|email',
             'password' =>  'required|min:6',
 
         ]);
-
+        
         $user =User::where('email' , '=' , $request->email)->get();
         if(sizeof($user) > 0){
            

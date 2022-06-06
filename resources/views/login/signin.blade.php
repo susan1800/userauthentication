@@ -15,7 +15,8 @@
         <button type="submit" class="login-button">SIGN IN</button>
 		
       </div>
-	  <p style="text-align:center">Dont Have an account <a href="">Sign Up</a></p>
+	  <br>
+	  <p style="text-align:center">Dont Have an account <a href="{{route('signup')}}"> Sign Up </a></p>
     </form>
 	<p>Remember me <input type="checkbox" ></p>
 	<p style="text-align:right"><a href="">Forgot Password</a></p>
