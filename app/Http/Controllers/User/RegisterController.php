@@ -11,18 +11,18 @@ use Hash;
 class RegisterController extends Controller
 {
     public function register(Request $request){
-       
+
         $this->validate($request, [
             'name'      =>  'required|max:191',
             'email'    =>  'required|email',
-            'phone'    =>  'required|digit:10',
+            'phone'    =>  'required|digits:10',
             'password' =>  'required|min:6',
 
         ]);
-        
+
         $user =User::where('email' , '=' , $request->email)->get();
         if(sizeof($user) > 0){
-           
+
             return redirect()->route('signin');
         }
 
@@ -32,15 +32,15 @@ class RegisterController extends Controller
         $params = $request->except('_token');
         $params['auth_id'] = $auth[0]['id'];
         $params['password'] = Hash::make($params['password']);
-        
+
         $user =new User($params);
         $user['auth_id']=$auth[0]['id'];
-        
+
         $user->save();
-        
+
         if($user){
             return redirect()->route('signin');
         }
-        
+
     }
 }

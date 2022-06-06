@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Auth;
 use Hash;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
     public function login(Request $request){
-        
+
         $this->validate($request, [
             'email'    =>  'required',
             'password' =>  'required',
         ]);
-       
+
         $user =User::where('email' , '=' , $request->email)->get();
-        
+
         if(sizeof($user) < 1){
-            return view('login.signup');
+            return $this->responseRedirectBack('Email not found Please refister first.', 'error', true, true);
         }
-        
+
         else{
 
             $returncheckpassword = $this->checkpassword($request->password , $user[0]->password);
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
 
 
-              
+
                $returncheckrole = $this->checkrole($user[0]->auth_id);
 
                if($returncheckrole == true){
@@ -54,7 +54,7 @@ class LoginController extends Controller
                 // echo "user is user";
                 return redirect()->route('user' );
             }
-            
+
     }
 }
 
@@ -80,7 +80,7 @@ class LoginController extends Controller
 
     public function checkverify($verified_at , $email){
         if($verified_at == null){
-            
+
             // return redirect()->route('sendotp' ,compact('email'));
             return false;
         }
