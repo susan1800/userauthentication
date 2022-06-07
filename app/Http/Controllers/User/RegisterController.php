@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\Auth;
 use App\Models\User;
 use Hash;
 
-class RegisterController extends Controller
+class RegisterController extends BaseController
 {
     public function register(Request $request){
 
@@ -19,11 +19,13 @@ class RegisterController extends Controller
             'password' =>  'required|min:6',
 
         ]);
+        $pieces = explode("@", $request->email);
+        if($pieces['1'] == "cosmoscollege.edu.np"){
 
         $user =User::where('email' , '=' , $request->email)->get();
         if(sizeof($user) > 0){
-
-            return redirect()->route('signin');
+            return $this->responseRedirect('signin', 'Account already registered ! Please login' ,'success',false, false);
+            // return redirect()->route('signin');
         }
 
 
@@ -39,8 +41,13 @@ class RegisterController extends Controller
         $user->save();
 
         if($user){
-            return redirect()->route('signin');
+            return $this->responseRedirect('signin', 'Register  successfully ! Please login' ,'success',false, false);
+
         }
+    }
+    else{
+        return $this->responseRedirectBack('Only College email is valid (@cosmoscollege.edu.np)', 'error', true, true);
+    }
 
     }
 }

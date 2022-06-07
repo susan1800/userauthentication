@@ -77,7 +77,7 @@ class BaseController extends Controller
         $this->setFlashMessage($message, $type);
         $this->showFlashMessages();
 
-        return redirect()->back();
+        return redirect()->back()->withInput();
     }
 
 

@@ -21,9 +21,9 @@
 
       </div>
 	  <br>
-	  <p style="text-align:center">Dont Have an account <a href="{{route('signup')}}"> Sign Up </a></p>
+	  <p style="text-align:center">Dont Have an account ? <a href="{{route('signup')}}"> Sign Up </a></p>
     </form>
-	<p>Remember me <input type="checkbox" ></p>
+
 	<p style="text-align:right"><a href="">Forgot Password</a></p>
   </section>
 
