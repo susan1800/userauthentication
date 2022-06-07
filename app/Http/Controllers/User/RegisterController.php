@@ -28,16 +28,21 @@ class RegisterController extends BaseController
             // return redirect()->route('signin');
         }
 
-
+        $roll = str_split($request->email);
+        $roll_no = "";
+        for($i=0;$i<6;$i++){
+            $roll_no = $roll_no.$roll[$i];
+        }
 
         $auth = Auth::where('title' , '=' , 'user')->get();
         $params = $request->except('_token');
+
         $params['auth_id'] = $auth[0]['id'];
         $params['password'] = Hash::make($params['password']);
 
         $user =new User($params);
         $user['auth_id']=$auth[0]['id'];
-
+        $user['roll_no'] = $roll_no;
         $user->save();
 
         if($user){

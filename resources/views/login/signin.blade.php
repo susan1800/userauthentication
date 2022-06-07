@@ -12,7 +12,7 @@
     </div>
     <form class="login-form" action="{{route('login')}}" method="post">
 		@csrf
-      <input type="email" name="email" class="login-input  @error('email') is-invalid @enderror" placeholder="email"  required autofocus/>
+      <input type="email" name="email" class="login-input  @error('email') is-invalid @enderror" placeholder="email" value="{{old('email')}}"  required autofocus/>
       <p style="color: red; margin-top:-23px;">@error('email') {{ $message }} @enderror</p>
       <input type="password" name="password" class="login-input  @error('password') is-invalid @enderror" placeholder="Password" required/>
       <p style="color: red; margin-top:-23px;">@error('password') {{ $message }} @enderror</p>

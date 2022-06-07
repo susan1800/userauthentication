@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Auth;
+use App\Models\PaymentStatus;
 use Hash;
 
 class LoginController extends BaseController
@@ -28,7 +29,7 @@ class LoginController extends BaseController
             $returncheckpassword = $this->checkpassword($request->password , $user[0]->password);
 
             if($returncheckpassword == false){
-                return redirect()->route('signin');
+                return $this->responseRedirectBack('Password not matched , Please enter valid password.', 'error', true, true);
             }
 
 
@@ -50,16 +51,24 @@ class LoginController extends BaseController
                 return redirect()->route('admin' );
                }
                else{
-                $request->session()->put('testuserlogin','yes');
+
                 // echo "user is user";
-                return redirect()->route('user' );
+                $returnPaymentStatus = $this->checkPaymentStatus($user[0]->roll_no);
+                if($returnPaymentStatus == true){
+                    $request->session()->put('testuserlogin','yes');
+                    return redirect()->route('user' );
+                }
+                else{
+                    return $this->responseRedirectBack('Payment Not Cleared , Please Contact To the Administrator.', 'error', true, true);
+                }
+
             }
 
     }
 }
 
 
-        private function checkpassword($inputpassword , $password){
+    private function checkpassword($inputpassword , $password){
         if(Hash::check($inputpassword, $password)){
 
             return true;
@@ -78,7 +87,7 @@ class LoginController extends BaseController
 
 
 
-    public function checkverify($verified_at , $email){
+    private function checkverify($verified_at , $email){
         if($verified_at == null){
 
             // return redirect()->route('sendotp' ,compact('email'));
@@ -92,7 +101,7 @@ class LoginController extends BaseController
 
 
 
-    public function checkrole($auth_id){
+    private function checkrole($auth_id){
         $auth = Auth::where('id' , '=' , $auth_id)->get();
                 if($auth[0]->title=="admin"){
                     // echo "user is admin";
@@ -102,6 +111,16 @@ class LoginController extends BaseController
                     // echo "user is user";
                     return false;
                 }
+    }
+
+    private function checkPaymentStatus($roll_no){
+        $status = PaymentStatus::where('roll_no' , $roll_no)->get();
+        if($status[0]->status == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 
