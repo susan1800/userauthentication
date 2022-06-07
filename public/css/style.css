@@ -242,7 +242,7 @@ body {
     background: #FDAB43;
 }
 
-@media(max-width: 780px) {
+@media(max-width: 980px) {
     .login-container {
         display: flex;
         flex-direction: column;
@@ -252,21 +252,7 @@ body {
         height: auto;
         padding: 5px;
         box-sizing: border-box;
-        zoom: 300%;
-    }
-}
-
-@media(max-width: 1024px) {
-    .login-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        width: 340px;
-        height: auto;
-        padding: 5px;
-        box-sizing: border-box;
-        zoom: 180%;
+        zoom: 250%;
     }
 }
 
