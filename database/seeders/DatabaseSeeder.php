@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         // $this->call(AuthTableSeeder::class);
-        $this->call(PaymentStatusSeeder::class);
+        // $this->call(PaymentStatusSeeder::class);
+        $this->call(UserTableStatusSeeder::class);
     }
 }

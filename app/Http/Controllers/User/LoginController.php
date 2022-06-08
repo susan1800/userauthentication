@@ -4,6 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Auth;
 use App\Models\PaymentStatus;
@@ -17,7 +22,7 @@ class LoginController extends BaseController
             'email'    =>  'required',
             'password' =>  'required',
         ]);
-
+        try {
         $user =User::where('email' , '=' , $request->email)->get();
 
         if(sizeof($user) < 1){
@@ -35,37 +40,40 @@ class LoginController extends BaseController
 
                $returbverify =  $this->checkverify($user[0]->email_verified_at , $user[0]->email);
                if($returbverify == false){
-                   $email = $user[0]->email;
-                return redirect()->route('sendotp' ,$email);
+
+                return $this->responseRedirect('sendotp' , '', 'success', true, true);
                }
-
-
-
 
 
                $returncheckrole = $this->checkrole($user[0]->auth_id);
 
                if($returncheckrole == true){
                 $request->session()->put('testadminlogin','yes');
-                // echo "user is admin";
-                return redirect()->route('admin' );
+                return redirect()->route('admin');
+
                }
                else{
 
-                // echo "user is user";
+
                 $returnPaymentStatus = $this->checkPaymentStatus($user[0]->roll_no);
                 if($returnPaymentStatus == true){
+
                     $request->session()->put('testuserlogin','yes');
-                    return redirect()->route('user' );
+                    return redirect()->route('user');
+
                 }
                 else{
                     return $this->responseRedirectBack('Payment Not Cleared , Please Contact To the Administrator.', 'error', true, true);
                 }
 
             }
+        }
 
+        }catch (ModelNotFoundException $e) {
+
+            return $this->responseRedirectBack('Error occurred while login.', 'error', true, true);
+        }
     }
-}
 
 
     private function checkpassword($inputpassword , $password){
@@ -74,10 +82,6 @@ class LoginController extends BaseController
             return true;
         }
         else{
-            // $name="fghb";
-            // return view('login.signin',compact('name'));
-
-            // return redirect()->route('signin' ,compact('name'));
             return false;
         }
     }
@@ -90,7 +94,6 @@ class LoginController extends BaseController
     private function checkverify($verified_at , $email){
         if($verified_at == null){
 
-            // return redirect()->route('sendotp' ,compact('email'));
             return false;
         }
         else{
@@ -104,11 +107,11 @@ class LoginController extends BaseController
     private function checkrole($auth_id){
         $auth = Auth::where('id' , '=' , $auth_id)->get();
                 if($auth[0]->title=="admin"){
-                    // echo "user is admin";
+
                     return true;
                 }
                 else{
-                    // echo "user is user";
+
                     return false;
                 }
     }

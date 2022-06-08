@@ -21,7 +21,7 @@
       <p style="margin-top: -23px; color: red;">@error('name') {{ $message }} @enderror</p>
 
 
-      <input type="number" name="phone" class="login-input form-control @error('phone') is-invalid @enderror" placeholder="phone number" value="{{old('phone')}}"/>
+      <input type="text" name="phone" class="login-input form-control @error('phone') is-invalid @enderror" placeholder="phone number" value="{{old('phone')}}"/>
         <p style="margin-top: -23px; color: red;">@error('phone') {{ $message }} @enderror</p>
 	    <input type="email" name="email" class="login-input  @error('email') is-invalid @enderror" placeholder="email" value="{{old('email')}}" />
         <p style="margin-top: -23px; color: red;">@error('email') {{ $message }} @enderror</p>

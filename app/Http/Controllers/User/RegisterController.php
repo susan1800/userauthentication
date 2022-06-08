@@ -4,6 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Auth;
 use App\Models\User;
 use Hash;
@@ -15,24 +20,29 @@ class RegisterController extends BaseController
         $this->validate($request, [
             'name'      =>  'required|max:191',
             'email'    =>  'required|email',
-            'phone'    =>  'required|digits:10',
+            'phone'    =>  'required|digits:10|unique:users,phone,',
             'password' =>  'required|min:6',
 
         ]);
-        $pieces = explode("@", $request->email);
-        if($pieces['1'] == "cosmoscollege.edu.np"){
+        try{
+        $resultemail = $this->checkEmail($request->email);
+        if($resultemail == 1){
+        $roll_no = $this->getRollNo($request->email);
 
-        $user =User::where('email' , '=' , $request->email)->get();
-        if(sizeof($user) > 0){
+        $useremailresult = $this->checkUser("email",$request->email);
+        if($useremailresult == 1)
+        {
             return $this->responseRedirect('signin', 'Account already registered ! Please login' ,'success',false, false);
-            // return redirect()->route('signin');
+
+        }
+        $userrollresult = $this->checkUser("roll_no",$roll_no);
+        if($userrollresult == 1)
+        {
+            return $this->responseRedirect('signin', 'Account already registered ! Please login' ,'success',false, false);
+
         }
 
-        $roll = str_split($request->email);
-        $roll_no = "";
-        for($i=0;$i<6;$i++){
-            $roll_no = $roll_no.$roll[$i];
-        }
+
 
         $auth = Auth::where('title' , '=' , 'user')->get();
         $params = $request->except('_token');
@@ -49,10 +59,46 @@ class RegisterController extends BaseController
             return $this->responseRedirect('signin', 'Register  successfully ! Please login' ,'success',false, false);
 
         }
+        else{
+            return $this->responseRedirectBack('Something wrong Please try again !', 'error', true, true);
+        }
     }
     else{
         return $this->responseRedirectBack('Only College email is valid (@cosmoscollege.edu.np)', 'error', true, true);
     }
+    }catch (ModelNotFoundException $e) {
 
+        return $this->responseRedirectBack('Error occurred while Register.', 'error', true, true);
+    }
+
+    }
+    private function getRollNo($email){
+        $roll = str_split($email);
+        $roll_no = "";
+        for($i=0;$i<6;$i++){
+            $roll_no = $roll_no.$roll[$i];
+        }
+        return $roll_no;
+    }
+
+
+    private function checkEmail($email){
+        $pieces = explode("@", $email);
+        if($pieces['1'] == "cosmoscollege.edu.np"){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    private function checkUser($column , $data){
+        $userroll =User::where($column , '=' , $data)->get();
+        if(sizeof($userroll) > 0){
+            return 1;
+
+        }
+        else{
+            return 0;
+        }
     }
 }

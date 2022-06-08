@@ -5,6 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Auth;
@@ -13,7 +18,10 @@ use Hash;
 class VerificationController extends Controller
 {
     public function sendotp($email){
-        
+
+
+        try{
+
         $otp=mt_rand(100000, 999999);
         $details = [
             'title' => 'Localhost',
@@ -24,6 +32,10 @@ class VerificationController extends Controller
         $hashcode =Crypt::encryptString($otp);
         $hashmail = Crypt::encryptString($email);
         return redirect()->route('verifyotp',['makeotp' => $hashcode , 'email'=> $hashmail]);
+    }catch (ModelNotFoundException $e) {
+
+        return $this->responseRedirectBack('Error occurred while send otp.', 'error', true, true);
+    }
     }
 
 
@@ -33,10 +45,11 @@ class VerificationController extends Controller
             'otp' =>  'required',
             'inputotp' =>  'required',
         ]);
+        try{
         if($request->inputotp == Crypt::decryptString($request->otp)){
             $users = User::where('email' , '=' , Crypt::decryptString($request->email))->get();
             $user =User::find($users[0]->id);
-            $user['email_verified_at'] = Carbon::now()->toDateTimeString(); 
+            $user['email_verified_at'] = Carbon::now()->toDateTimeString();
             $user->save();
             if($user){
 
@@ -61,6 +74,10 @@ class VerificationController extends Controller
         else{
             return redirect()->route('verifyotp',['makeotp' => $request->otp , 'email'=> $request->email]);
         }
+    }catch (ModelNotFoundException $e) {
+
+        return $this->responseRedirectBack('Error occurred in OTP.', 'error', true, true);
+    }
     }
 
 
