@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
@@ -10,12 +10,13 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use Illuminate\Support\Facades\Storage;
+use App\Models\PaymentStatus;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Auth;
-use mail;
+use Mail;
 use Hash;
-class VerificationController extends Controller
+class VerificationController extends BaseController
 {
     public function sendotp($email){
 
@@ -61,9 +62,15 @@ class VerificationController extends Controller
                 return redirect()->route('admin' );
                }
                else{
+                $returnPaymentStatus = $this->checkPaymentStatus($users[0]->roll_no);
+                if($returnPaymentStatus == true){
                 $request->session()->put('testuserlogin','yes');
                 // echo "user is user";
                 return redirect()->route('user' );
+                }
+                else{
+                    return $this->responseRedirect('signin' , 'Payment not cleared ! Please contact to administrator.');
+                }
             }
 
             }
@@ -93,5 +100,14 @@ class VerificationController extends Controller
                     // echo "user is user";
                     return false;
                 }
+    }
+    private function checkPaymentStatus($roll_no){
+        $status = PaymentStatus::where('roll_no' , $roll_no)->get();
+        if($status[0]->status == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
