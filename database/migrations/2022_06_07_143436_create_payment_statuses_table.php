@@ -17,6 +17,7 @@ class CreatePaymentStatusesTable extends Migration
             $table->id();
             $table->integer('roll_no')->unique();
             $table->boolean('status')->default('0');
+            $table->boolean('approve_form')->default('0');
             $table->timestamps();
         });
     }

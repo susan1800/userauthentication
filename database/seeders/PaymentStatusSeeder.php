@@ -15,161 +15,193 @@ class PaymentStatusSeeder extends Seeder
         [
             'roll_no'                       =>  '180101',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180102',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180103',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180104',
             'status'                       =>  '0',
+            'approve_form'                       =>  '0',
 
         ],
         [
             'roll_no'                       =>  '180105',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180106',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180107',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180108',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180109',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180110',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180111',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180112',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180113',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180114',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180115',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180116',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180117',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180118',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180119',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180120',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180121',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180122',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180123',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180124',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180125',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180126',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180127',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180128',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180129',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180130',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180131',
             'status'                       =>  '1',
+             'approve_form'                       =>  '1',
 
         ],
         [
             'roll_no'                       =>  '180132',
             'status'                       =>  '0',
+            'approve_form'                       =>  '0',
 
         ],
 

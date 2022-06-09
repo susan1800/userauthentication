@@ -48,6 +48,6 @@ Route::middleware(['userlogin'])->group(function () {
 });
 
 
-    Route:: view('/' , 'adminpage')->name('admin');
+    Route:: view('/' , 'login.signin')->name('admin');
 
 

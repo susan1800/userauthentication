@@ -88,7 +88,7 @@ class LoginController extends BaseController
 
 
 
-
+ 
 
 
     private function checkverify($verified_at , $email){

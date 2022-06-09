@@ -13,4 +13,6 @@ class PaymentStatus extends Model
         'roll_no',
         'status',
     ];
+
+    
 }

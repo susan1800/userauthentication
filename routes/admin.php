@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FormDataController;
 use App\Http\Controllers\Admin\PaymentStatusController;
+use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers;
 
 Route::middleware(['adminlogin'])->group(function () {
@@ -20,5 +21,8 @@ Route::middleware(['adminlogin'])->group(function () {
             Route::get('/', [PaymentStatusController::class, 'index'])->name('admin.paymentstatus.index');
        });
     });
+
+    Route::post('search', [SearchController::class, 'search'])->name('searchajax');
+
 });
 

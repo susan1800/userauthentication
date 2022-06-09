@@ -1,3 +1,4 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @extends('admin.app')
 
 @section('style')
@@ -60,6 +61,51 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+
+
+/*
+model box 
+*/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  margin-top: 150px;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
     </style>
 @endsection
 @section('content')
@@ -72,7 +118,18 @@ input:checked + .slider:before {
                             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
                                 Full Table
                                 <div style="float: right; display:inline-flex">
-                                    <input type="search" style=" border-radius: 20px; box-shadow: 2px 2px #888888; padding:5px;" placeholder="Search ...">
+                                    <input type="text" id="search" name="search" style=" border-radius: 20px; box-shadow: 2px 2px #888888; padding:5px;" placeholder="Search ..." onkeyup="search()" onkeydown="search()" onchange="search()">
+
+                                </div>
+                                <div id="myModal" class="modal">
+
+                                  <!-- Modal content -->
+                                  <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <p></p>
+                                    <div id="search-content"></div>
+                                  </div>
+                                
                                 </div>
                             </div>
                             <div class="p-3">
@@ -82,110 +139,42 @@ input:checked + .slider:before {
                                         <th class="border w-1/4 px-4 py-2">Student Name</th>
                                         <th class="border w-1/6 px-4 py-2">Fee Status</th>
                                         <th class="border w-1/7 px-4 py-2">Approve Form</th>
-                                        <th class="border w-1/5 px-4 py-2">Actions</th>
+                                        {{-- <th class="border w-1/5 px-4 py-2">Actions</th> --}}
                                       </tr>
                                     </thead>
                                     <tbody>
+                                      @foreach ($payments as $payment)
                                         <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
+                                            <td class="border px-4 py-2">{{$payment->name}} {{$payment->roll_no}}</td>
 
                                             <td class="border px-4 py-2">
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
+                                              @if ($payment->status == 1)
+                                              <i class="fas fa-check text-green-500 mx-2"></i>
+                                              @else
+                                              <i class="fas fa-times text-red-500 mx-2"></i>
+                                              @endif
+                                                
                                             </td>
                                             <td class="border px-4 py-2">
                                                 <label class="switch">
-                                                    <input type="checkbox" checked>
+                                                    <input type="checkbox" @if ($payment->approve_form == 1)
+                                                    checked
+                                                    @endif >
                                                     <span class="slider round"></span>
                                                   </label>
                                             </td>
-                                            <td class="border px-4 py-2">
+                                            {{-- <td class="border px-4 py-2">
                                                 <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
                                                         <i class="fas fa-eye"></i></a>
                                                 <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
                                                         <i class="fas fa-edit"></i></a>
 
-                                            </td>
+                                            </td> --}}
                                         </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Rickey Ponting 180102</td>
-
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked>
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
-
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox">
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
-
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-times text-red-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox">
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
-
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-times text-red-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked>
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr>
+                                        @endforeach
+                                        
+                                        
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -194,6 +183,73 @@ input:checked + .slider:before {
                     <!--/Grid Form-->
 
 
-@endsection
 
+@endsection
+<script>
+//    $(document).ready(function() {
+// $('#search').on('keyup', function(){
+            
+//             search();
+//         });
+
+//         $('#search').on('focus', function(){
+//             search();
+           
+//         });
+//       });
+
+        function search(){
+          
+
+            // var searchKey = $('#search').val();
+            var searchKey = document.getElementById('search').value;
+          
+          
+            
+            if(searchKey.length > 0){
+              // Get the modal
+              var modal = document.getElementById("myModal");
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                  modal.style.display = "none";
+                }
+                modal.style.display = "block";
+
+                $.post('{{ route('searchajax') }}', {_token:'{{ csrf_token() }}',  search:searchKey}, function(data)
+               {
+                console.log(data);
+                if(data == 1){
+                  $('#search-content').html('Sorry, nothing found for <strong>"'+searchKey+'"</strong>');
+                        
+                }
+                else{
+                  
+                        $('#search-content').html(data);
+                       
+                                
+                }
+            });
+
+            }
+            else {
+              var modal = document.getElementById("myModal");
+              modal.style.display = "none";
+             
+                
+            }
+           
+        }
+        
+    $(document).ready(function() {
+     var modal = document.getElementById("myModal");
+     window.onclick = function(event) {
+        modal.style.display = "none";                  
+    }
+});
+
+</script>
 @section('script')  @endsection
