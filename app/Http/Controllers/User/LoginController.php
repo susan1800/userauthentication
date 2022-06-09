@@ -40,8 +40,8 @@ class LoginController extends BaseController
 
                $returbverify =  $this->checkverify($user[0]->email_verified_at , $user[0]->email);
                if($returbverify == false){
-
-                return $this->responseRedirect('sendotp' , '', 'success', true, true);
+                return redirect()->route('sendotp' , $user[0]->email);
+                // return $this->responseRedirect('sendotp' , '', 'success', true, true);
                }
 
 
@@ -49,7 +49,7 @@ class LoginController extends BaseController
 
                if($returncheckrole == true){
                 $request->session()->put('testadminlogin','yes');
-                return redirect()->route('admin');
+                return redirect()->route('admin.dashboard');
 
                }
                else{

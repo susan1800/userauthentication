@@ -25,6 +25,7 @@ class UserTableStatusSeeder extends Seeder
             'name'      =>  'admin',
             'email'     =>  'admin@admin.com',
             'password'  =>  bcrypt('cosmos@miniproject'),
+            'email_verified_at' => '2022-06-08 19:51:20',
             'auth_id'    => $auth[0]->id,
         ]);
 

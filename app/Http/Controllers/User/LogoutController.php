@@ -16,11 +16,11 @@ class LogoutController extends BaseController
     public function userlogout(){
 
         session()->forget('testuserlogin');
-        return $this->responseRedirect('signin' , 'logout successfully.', 'success', true, true);
+        return redirect()->route('signin');
     }
     public function adminlogout(){
 
         session()->forget('testadminlogin');
-        return $this->responseRedirect('signin' , 'logout successfully.', 'success', true, true);
+        return redirect()->route('signin');
     }
 }

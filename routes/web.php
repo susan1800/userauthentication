@@ -17,6 +17,7 @@ use App\Http\Controllers\User\LogoutController;
 */
 
 
+require 'admin.php';
 
 Route::get('/signin', function () {
     return view('login.signin');
@@ -46,7 +47,7 @@ Route::middleware(['userlogin'])->group(function () {
     Route:: view('/home' , 'welcome')->name('user');
 });
 
-Route::middleware(['adminlogin'])->group(function () {
+
     Route:: view('/' , 'adminpage')->name('admin');
-});
-    
+
+
