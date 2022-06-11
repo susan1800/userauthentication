@@ -68,7 +68,7 @@ input:checked + .slider:before {
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                             
                             <div class="p-3">
-                                <table class="table-responsive w-full rounded">
+                                <table class="table-responsive w-full rounded" style="width: 100%;">
                                 @if (count($searchpayments) > 0)
                                     <thead>
                                       <tr>

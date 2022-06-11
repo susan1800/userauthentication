@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\Program;
 class ProgramSeeder extends Seeder
 {
     /**
@@ -11,8 +11,44 @@ class ProgramSeeder extends Seeder
      *
      * @return void
      */
+    protected $programs = [
+        [
+            'program'                       =>  'information technology',
+            'departnment'                   =>  'ICT',
+        ],
+        [
+            'program'                       =>  'Computer',
+            'departnment'                   =>  'ICT',
+        ],
+        [
+            'program'                       =>  'Electronics',
+            'departnment'                   => 'ICT',
+        ],
+        [
+            'program'                       =>  'Civil',
+            'departnment'                   =>  'civil',
+        ],
+        [
+            'program'                       =>  'architecture',
+            'departnment'                   =>  'architecture',
+        ],
+        [
+            'program'                       =>  'BBA',
+            'departnment'                   =>  'BBA',
+        ],
+
+    ];
     public function run()
     {
-        //
+        foreach ($this->programs as $auth)
+        {
+            $result = Program::create($auth);
+            if (!$result) {
+                $this->command->info("Insert failed at record $index.");
+                return;
+            }
+        }
+        $this->command->info('Inserted '.count($this->programs). ' records');
     }
 }
+

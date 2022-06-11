@@ -5,6 +5,8 @@ use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\VerificationController;
 use App\Http\Controllers\User\LogoutController;
+use App\Http\Controllers\FormFillupController;
+use App\Http\Controllers\SubjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,10 +46,10 @@ Route::get('/adminlogout', [LogoutController::class, 'adminlogout'])->name('admi
 
 
 Route::middleware(['userlogin'])->group(function () {
-    Route:: view('/home' , 'welcome')->name('user');
+    // Route:: view('/' , 'form.fillupform')->name('user');
+    Route::get('/', [FormFillupController::class, 'index'])->name('user');
+    Route::post('/getsubject', [SubjectController::class, 'getSubject'])->name('getsubject');
 });
 
-
-    Route:: view('/' , 'login.signin')->name('admin');
 
 

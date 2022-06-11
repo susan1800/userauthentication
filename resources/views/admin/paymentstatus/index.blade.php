@@ -64,50 +64,9 @@ input:checked + .slider:before {
 
 
 
-/*
-model box 
-*/
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  margin-top: 150px;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
     </style>
 @endsection
+
 @section('content')
 @include('admin.partials.flash')
 
@@ -118,19 +77,10 @@ model box
                             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
                                 Full Table
                                 <div style="float: right; display:inline-flex">
-                                    <input type="text" id="search" name="search" style=" border-radius: 20px; box-shadow: 2px 2px #888888; padding:5px;" placeholder="Search ..." onkeyup="search()" onkeydown="search()" onchange="search()">
-
+                                    <input type="text" id="search" name="search" style=" border-radius: 20px; box-shadow: 2px 2px #888888; padding:5px;" placeholder="Search ..." onkeyup="search()" onkeydown="search()" onclick="search()" onchange="search()">
+                                    
                                 </div>
-                                <div id="myModal" class="modal">
-
-                                  <!-- Modal content -->
-                                  <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <p></p>
-                                    <div id="search-content"></div>
-                                  </div>
-                                
-                                </div>
+                               
                             </div>
                             <div class="p-3">
                                 <table class="table-responsive w-full rounded">
@@ -186,17 +136,17 @@ model box
 
 @endsection
 <script>
-//    $(document).ready(function() {
-// $('#search').on('keyup', function(){
+   $(document).ready(function() {
+$('#search').on('keyup', function(){
             
-//             search();
-//         });
+            search();
+        });
 
-//         $('#search').on('focus', function(){
-//             search();
+        $('#search').on('focus', function(){
+            search();
            
-//         });
-//       });
+        });
+      });
 
         function search(){
           
@@ -206,12 +156,12 @@ model box
           
           
             
-            if(searchKey.length > 0){
+            if(searchKey.length > 2){
               // Get the modal
               var modal = document.getElementById("myModal");
 
                 // Get the <span> element that closes the modal
-                var span = document.getElementsByClassName("close")[0];
+                var span = document.getElementsByClassName("close00")[0];
 
                 // When the user clicks on <span> (x), close the modal
                 span.onclick = function() {
@@ -223,20 +173,16 @@ model box
                {
                 console.log(data);
                 if(data == 1){
-                  $('#search-content').html('Sorry, nothing found for <strong>"'+searchKey+'"</strong>');
-                        
+                  $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
                 }
                 else{
-                  
-                        $('#search-content').html(data);
-                       
-                                
+                  $('#search-content').html(data);  
                 }
             });
 
             }
             else {
-              var modal = document.getElementById("myModal");
+              var modal = document.getElementById("myModal00");
               modal.style.display = "none";
              
                 
@@ -245,7 +191,7 @@ model box
         }
         
     $(document).ready(function() {
-     var modal = document.getElementById("myModal");
+     var modal = document.getElementById("myModal00");
      window.onclick = function(event) {
         modal.style.display = "none";                  
     }

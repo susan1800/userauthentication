@@ -1,3 +1,50 @@
+<style>
+    /*
+model box 
+*/
+/* The Modal (background) */
+.modal00 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  float:right;
+  margin-top: 150px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background: #d9dadb;
+
+}
+
+/* Modal Content */
+.modal-content00 {
+  
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  floar:right;
+  height:100%;
+  overflow:auto;
+ 
+
+}
+
+/* The Close Button */
+.close00 {
+  color: #aaaaaa;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close00:hover,
+.close00:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 <header class="bg-nav">
             <div class="flex justify-between">
                 <div class="p-1 mx-3 inline-flex items-center">
@@ -20,4 +67,14 @@
                 </div>
             </div>
         </header>
+        <div id="myModal" class="modal00">
+
+            <!-- Modal content -->
+            <div class="modal-content00">
+              <span class="close00">&times;</span>
+              <p></p>
+              <div id="search-content"></div>
+            </div>
+          
+          </div>
         <!--/Header-->
