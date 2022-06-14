@@ -39,6 +39,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/{email}/sendotp', [VerificationController::class, 'sendotp'])->name('sendotp');
 Route::post('/checkotp', [VerificationController::class, 'checkotp'])->name('checkotp');
 
+Route::get('/{email}/resendotp', [VerificationController::class, 'resendotp'])->name('resendotp');
 
 Route::get('/userlogout', [LogoutController::class, 'userlogout'])->name('userlogout');
 Route::get('/adminlogout', [LogoutController::class, 'adminlogout'])->name('adminlogout');

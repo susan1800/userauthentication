@@ -9,6 +9,7 @@
 <div style="padding: 10px;">
 <div class="aiz-titlebar text-left mt-2 mb-3 text-center">
     <h5 class="mb-0 h6 btn btn-primary action-btn ">Exam registration form</h5>
+   <a href="{{route('userlogout')}}"><h5 class="btn btn-primary action-btn " style="float: right;">Logout</h5></a>
 </div>
 
     <form class="form form-horizontal mar-top" action="products.store" method="POST" enctype="multipart/form-data" id="choice_form">

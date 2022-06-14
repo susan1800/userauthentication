@@ -205,7 +205,7 @@ $otp=$_GET['makeotp'];
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>				
 			</form>
-			<p><a href="{{route('sendotp' , $email)}}">Resend code</a>
+			<p><a href="{{route('resendotp' , $email)}}">Resend code</a>
 				
 				
 		</div>

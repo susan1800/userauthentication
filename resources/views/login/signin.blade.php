@@ -11,14 +11,14 @@
     <div class="flash">
         @include('partials.flash')
     </div>
-    <form class="login-form" action="{{route('login')}}" method="post">
+    <form class="login-form form" id="form" action="{{route('login')}}" method="post">
 		@csrf
-      <input type="email" name="email" class="login-input  @error('email') is-invalid @enderror" placeholder="email"   autofocus/>
+      <input type="email" name="email" id="email" class="login-input  @error('email') is-invalid @enderror" placeholder="email"   autofocus/>
       <p style="color: red; margin-top:-23px;">@error('email') {{ $message }} @enderror</p>
-      <input type="password" name="password" class="login-input  @error('password') is-invalid @enderror" placeholder="Password" />
+      <input type="password" name="password" id="password" class="login-input  @error('password') is-invalid @enderror" placeholder="Password" />
       <p style="color: red; margin-top:-23px;">@error('password') {{ $message }} @enderror</p>
       <div class="submit-container">
-        <button type="submit" class="login-button">SIGN IN</button>
+        <button type="submit" class="login-button" id="button" >SIGN IN</button>
 
       </div>
 	  <br>
@@ -30,6 +30,15 @@
 
 
 </div>
+<script>
+ $(document).ready(() => {
 
+  $("#button").click(function(){
+    alert('vcbvc');
+        this.disabled = true;
+        return true;
+    });
+});
+</script>
 
 @include('partials.script')

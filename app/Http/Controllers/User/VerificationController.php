@@ -25,7 +25,29 @@ class VerificationController extends BaseController
 
         $otp=mt_rand(100000, 999999);
         $details = [
-            'title' => 'Localhost',
+            'title' => 'Cosmos College of Management and Technology ',
+            'body' => "your otp-code is",
+            'head'=>$otp
+        ];
+        \Mail::to($email)->send(new \App\Mail\mailotp($details));
+        $hashcode =Crypt::encryptString($otp);
+        $hashmail = Crypt::encryptString($email);
+        return redirect()->route('verifyotp',['makeotp' => $hashcode , 'email'=> $hashmail]);
+    }catch (ModelNotFoundException $e) {
+
+        return $this->responseRedirectBack('Error occurred while send otp.', 'error', true, true);
+    }
+    }
+
+
+    public function resendotp($email){
+
+
+        try{
+            $email = Crypt::decryptString($email);
+        $otp=mt_rand(100000, 999999);
+        $details = [
+            'title' => 'Cosmos College of Management and Technology ',
             'body' => "your otp-code is",
             'head'=>$otp
         ];
