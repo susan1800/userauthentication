@@ -28,16 +28,19 @@
                         
                         $i++;
                     @endphp
-                            <select class="form-control">
+                            <select class="form-control" onchange="selectbarrier()" id="getregularorbarrier">
                                 <option>Select Regular or Barrier subject</option>
-                                <option>{{$subject->subject}}</option>
-                                <option>{{$barrier->subject}}</option>
+                                
+                                <option value="{{$barrier->subject_code}}">{{$barrier->subject}}</option>
+                                <option value="{{$subject->subject_code}}">{{$subject->subject}}</option>
                             </select>
+                            <th id="regularorbarriercode"></th>
                         @else
                             {{$subject->subject}}
+                            <th>{{$subject->subject_code}}</th>
                         @endif
                     </th>
-                    <th>{{$subject->subject_code}}</th>
+                    
                 </tr>
                 @php
                     $i++;
@@ -75,7 +78,7 @@
                     
                     @foreach ($subjects as $subject)
                     @if (!empty($subject->concorrent_id))
-                    <tr style="padding:5px;">
+                    <tr style="padding:5px;" id="{{$subject->id}}">
                         <th>{{$i}}</th>
                         <th>
                             
@@ -90,7 +93,7 @@
                         </th>
                         <th>{{$concorrent->subject_code}}</th>
                         <td>Concurrent Subject (Remove if you dont have back in this subject)</td>
-                        <th style="text-align: cemter; color:red"><p style="text-align: center">&#10008;</p></th>
+                        <th style="text-align: cemter; color:red"><p style="text-align: center" onclick="removeconcurrent('{{$subject->id}}')">&#10008;</p></th>
                     </tr>
                    
                     @endif
@@ -100,3 +103,25 @@
                     </table>
             </div>
 </div>
+
+
+
+<script>
+    function removeconcurrent(id){
+        if(confirm("This is concurrent subject , are you sure to remove ?")){
+        document.getElementById(id).remove();
+        }
+    }
+    function selectbarrier(){
+        var code = document.getElementById('getregularorbarrier').value;
+        
+        if(confirm("This is Barrier subject , are you sure to change it ?")){
+        document.getElementById('regularorbarriercode').innerHTML=code;
+        }
+    }
+    function addbackrow(){
+        var cell = row.insertCell();
+        cell.innerHTML = "AA";
+        cell.innerHTML = "AA";
+    }
+</script>
