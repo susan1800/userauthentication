@@ -1,3 +1,8 @@
+<style>
+    .mousefocus:hover{
+        cursor: pointer;
+    }
+</style>
 <div class="card">
     <div class="card-header">
         <h5 class="mb-0 h6">
@@ -56,17 +61,36 @@
         </h5>
             <div style="text-align: right; display:inline-flex">
                
-                <input type="text" id="addbacksubject" class="form-control" style="border-radius: 50px; color:black" placeholder="Add back subject">
-                <h1>&#10146;</h1>
+                {{-- <input type="text" id="addbacksubject" class="form-control" style="border-radius: 50px; color:black" placeholder="Add back subject">
+                 --}}
+                 <select class="form-control" id="addbacksubject">
+                    <option value="">Add back subject</option>
+                    @foreach ($allsubjects as $allsubject)
+                        
+                   {{-- @if () --}}
+                       
+                  
+                    <option value="{{$allsubject->subject_code}}">{{$allsubject->subject}}</option>
+                  
+                    {{-- @endif --}}
+                    @endforeach
+                 </select>
+                 @foreach ($allsubjects as $allsubject)
+                        
+                
+                  <input type="hidden" value="{{$allsubject->subject}}" id="{{$allsubject->subject_code}}">
+                 
+                  @endforeach
+                <h1 class="mousefocus" onclick="addbackrow()">&#10146;</h1>
             </div>
         
     </div>
 
 
             <div class="card-body">  
-                <table border="1" style="width:100%;">
+                <table border="1" style="width:100%;" id="backtable">
                     <tr>
-                        <th>SN</th>
+                       
                         <th>Subject</th>
                         <th>Subject Code</th>
                         <th>Remarks</th>
@@ -79,7 +103,7 @@
                     @foreach ($subjects as $subject)
                     @if (!empty($subject->concorrent_id))
                     <tr style="padding:5px;" id="{{$subject->id}}">
-                        <th>{{$i}}</th>
+                        {{-- <th>{{$i}}</th> --}}
                         <th>
                             
                                
@@ -107,6 +131,19 @@
 
 
 <script>
+
+
+
+document.getElementById("choice_form").onkeypress = function(e) {
+   
+    // var key = document.getElementById('addbacksubject').value;     
+    // return event.key != 'Enter'
+    
+  }
+
+
+
+
     function removeconcurrent(id){
         if(confirm("This is concurrent subject , are you sure to remove ?")){
         document.getElementById(id).remove();
@@ -120,8 +157,25 @@
         }
     }
     function addbackrow(){
-        var cell = row.insertCell();
-        cell.innerHTML = "AA";
-        cell.innerHTML = "AA";
+        var table = document.getElementById('backtable');
+        var code=document.getElementById('addbacksubject').value;
+        var subject=document.getElementById(code).value;
+        if(code!= ''){
+        var row = table.insertRow();
+        var cell1 = row.insertCell();
+        var cell2 = row.insertCell();
+        var cell3 = row.insertCell();
+        var cell4 = row.insertCell();
+        
+        cell1.innerHTML = "<br>"+subject+"</br>";
+        cell2.innerHTML = "<br>"+code+"</br>";
+        cell3.innerHTML = "Concurrent Subject (Remove if you dont have back in this subject)";
+       
+        cell4.innerHTML = "<p style='color:red;' onclick='removeconcurrent('{{$subject->subject_code}}')'>&#10008;</p>"
+        }
     }
+
+
+
+
 </script>

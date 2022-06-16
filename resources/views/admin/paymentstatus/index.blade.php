@@ -154,35 +154,34 @@ $('#search').on('keyup', function(){
             // var searchKey = $('#search').val();
             var searchKey = document.getElementById('search').value;
           
-          
+            var modal = document.getElementById("myModal");
             
             if(searchKey.length > 2){
-              // Get the modal
-              var modal = document.getElementById("myModal");
+                // Get the modal
+                
 
-                // Get the <span> element that closes the modal
-                var span = document.getElementsByClassName("close00")[0];
+                  // Get the <span> element that closes the modal
+                  var span = document.getElementsByClassName("close00")[0];
 
-                // When the user clicks on <span> (x), close the modal
-                span.onclick = function() {
-                  modal.style.display = "none";
-                }
-                modal.style.display = "block";
+                  // When the user clicks on <span> (x), close the modal
+                  span.onclick = function() {
+                    modal.style.display = "none";
+                  }
+                  modal.style.display = "block";
 
-                $.post('{{ route('searchajax') }}', {_token:'{{ csrf_token() }}',  search:searchKey}, function(data)
-               {
-                console.log(data);
-                if(data == 1){
-                  $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
-                }
-                else{
-                  $('#search-content').html(data);  
-                }
-            });
-
+                  $.post('{{ route('searchajax') }}', {_token:'{{ csrf_token() }}',  search:searchKey}, function(data)
+                {
+                  console.log(data);
+                  if(data == 1){
+                    $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
+                  }
+                  else{
+                    $('#search-content').html(data);  
+                  }
+              });
             }
             else {
-              var modal = document.getElementById("myModal00");
+              
               modal.style.display = "none";
              
                 
