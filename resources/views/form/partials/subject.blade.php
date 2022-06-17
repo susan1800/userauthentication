@@ -102,7 +102,7 @@
                     
                     @foreach ($subjects as $subject)
                     @if (!empty($subject->concorrent_id))
-                    <tr style="padding:5px;" id="{{$subject->id}}">
+                    <tr style="padding:5px;" id="{{$subject->id}}" name="{{$subject->id}}">
                         {{-- <th>{{$i}}</th> --}}
                         <th>
                             
@@ -144,11 +144,46 @@ document.getElementById("choice_form").onkeypress = function(e) {
 
 
 
-    function removeconcurrent(id){
+    function removeconcurrent(rowid){
         if(confirm("This is concurrent subject , are you sure to remove ?")){
-        document.getElementById(id).remove();
-        }
-    }
+        // document.getElementById(id).remove();
+
+
+        var table = document.getElementById('backtable');  
+        var rowCount = table.rows.length;  
+        for (var i = 0; i < rowCount; i++) {  
+            var row = table.rows[i];  
+           
+            var rowObj = row.cells[0];  
+           alert(rowObj.name);
+            if (rowObj.id == rowid) {  
+                alert('dfgf');
+                table.deleteRow(i);  
+                rowCount--;  
+            }  
+        }  
+        } 
+
+
+}
+        function removeRow(btnName) {  
+    try {  
+        var table = document.getElementById('backtable');  
+        var rowCount = table.rows.length;  
+        for (var i = 0; i < rowCount; i++) {  
+            var row = table.rows[i];  
+            var rowObj = row.cells[0].childNodes[0];  
+            alert('gf');
+            if (rowObj.name == btnName) {  
+                table.deleteRow(i);  
+                rowCount--;  
+            }  
+        }  
+    } catch (e) {  
+        alert(e);  
+    }  
+} 
+        
     function selectbarrier(){
         var code = document.getElementById('getregularorbarrier').value;
         
@@ -162,16 +197,34 @@ document.getElementById("choice_form").onkeypress = function(e) {
         var subject=document.getElementById(code).value;
         if(code!= ''){
         var row = table.insertRow();
-        var cell1 = row.insertCell();
-        var cell2 = row.insertCell();
-        var cell3 = row.insertCell();
-        var cell4 = row.insertCell();
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        // var cell4 = row.insertCell(3);
         
         cell1.innerHTML = "<br>"+subject+"</br>";
         cell2.innerHTML = "<br>"+code+"</br>";
         cell3.innerHTML = "Concurrent Subject (Remove if you dont have back in this subject)";
        
-        cell4.innerHTML = "<p style='color:red;' onclick='removeconcurrent('{{$subject->subject_code}}')'>&#10008;</p>"
+        var cell4 = row.insertCell(4); 
+        var rowCount = table.rows.length;  
+        var row = table.insertRow(rowCount);  
+        alert('xghvgf');
+        var element1 = document.createElement("input"); 
+        
+        
+        
+        element1.type = "button";  
+        var btnName = "button" + (rowCount + 1);  
+        element1.name = btnName;  
+        element1.setAttribute('value', 'Delete'); // or element1.value = "button";  
+        element1.onclick = function() {  
+            removeRow(btnName);  
+        }  
+        
+        cell4.appendChild(element1);  
+
+        // cell4.innerHTML = '<p style="color:red;" id="'+code+'">&#10008;</p>'
         }
     }
 
