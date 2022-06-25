@@ -41,7 +41,7 @@ class FormFillupController extends Controller
         // dd($filename);
 
         Storage::disk('public')->putFileAs(
-            'signature',
+            'signature', 
             $file,
             $filename
         );
@@ -56,6 +56,7 @@ class FormFillupController extends Controller
         $student-> user_id= $request['user_id'];
         $student-> program_id= $request['program_id'];
         $student-> level_id= $request['level_id'];
+        // $student-> signature= $request['signature'];
         $student-> save();
     }
 }
