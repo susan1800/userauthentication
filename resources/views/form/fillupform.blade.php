@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="program">
+                            <label for="level">
                                 Level
                             </label>
                             <select id="level" name="level" class="form-control form-control aiz-selectpicker" onchange="selectexamrollno(); getSubject()" data-live-search="true">
