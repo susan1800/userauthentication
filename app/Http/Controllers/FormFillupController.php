@@ -7,6 +7,8 @@ use App\Models\Program;
 use App\Models\Level;
 use App\Models\FormData;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 class FormFillupController extends Controller
 {
     public function index(){
@@ -22,6 +24,30 @@ class FormFillupController extends Controller
 
     public function store(request $request)
     {
+
+        $folderPath = public_path('signature/');
+       
+
+        $image_parts = explode(";base64,", $request->signature);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $file = $folderPath . uniqid() . '.' . $image_type;
+        // file_put_contents($file, $image_base64);
+
+
+
+        $filename = time().Str::random(25).'.'. $image_type;
+        // dd($filename);
+
+        Storage::disk('public')->putFileAs(
+            'signature',
+            $file,
+            $filename
+        );
+
+
+        dd($signature);
         dd($request);
         $student= new FormFillup;
         $student-> registration_no= $request['registration_no'];

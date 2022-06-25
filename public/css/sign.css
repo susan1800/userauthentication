@@ -1,4 +1,4 @@
-$roopairs-teal: hsl(165.9, 72.5%, 47.1%);
+/* $roopairs-teal: hsl(165.9, 72.5%, 47.1%);
 $roopairs-green: hsl(140.2, 50.2%, 58.2%);
 $roopairs-lightgrey: hsl(0, 0%, 87.1%);
 $roopairs-shadow: hsla(204, 4.4%, 44.7%, 0.17);
@@ -127,9 +127,7 @@ canvas {
 #clear_button {
     z-index: 10;
     position: absolute;
-    right: 2em;
-    padding: 1.5em 2em;
-    
+    marright: 0em;
     color: #21cfa6;
     font-weight: 600;
     font-size: 14pt;
@@ -138,5 +136,62 @@ canvas {
 
 #finish_button {
     margin-top: 2em;
+    cursor: pointer;
+} */
+
+$roopairs-teal: hsl(165.9, 72.5%, 47.1%);
+$roopairs-green: hsl(140.2, 50.2%, 58.2%);
+$roopairs-lightgrey: hsl(0, 0%, 87.1%);
+$roopairs-shadow: hsla(204, 4.4%, 44.7%, 0.17);
+header {
+    margin-bottom: 1em;
+    text-align: center;
+    padding-top: 1em;
+}
+
+canvas {
+    border: 1px #5fca83 dashed;
+    border-radius: 7px;
+}
+
+.signature-pad-container {
+    height: 100%;
+    width: 100%;
+    padding: 2em;
+    background-color: white;
+    box-shadow: 0 0 20px 1px #ddd;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .signature-pad-container {
+        height: 300px;
+        width: 100%;
+        padding: 2em;
+        background-color: white;
+        box-shadow: 0 0 20px 1px #ddd;
+        text-align: center;
+    }
+    header {
+        margin-bottom: 1em;
+        text-align: center;
+        padding-top: 1em;
+        width: 100px;
+    }
+    canvas {
+        border: 1px #5fca83 dashed;
+        border-radius: 7px;
+        width: 100%;
+        height: 250px;
+    }
+}
+
+#clear_button {
+    z-index: 10;
+    position: absolute;
+    right: 3em;
+    color: #21cfa6;
+    font-weight: 600;
+    font-size: 10pt;
     cursor: pointer;
 }
