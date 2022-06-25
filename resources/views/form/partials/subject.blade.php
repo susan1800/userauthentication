@@ -86,6 +86,16 @@
         
     </div>
 
+<input type="hidden" name='100' id="100">
+<input type="hidden" name='101' id="101">
+<input type="hidden" name='102' id="102">
+<input type="hidden" name='103' id="103">
+<input type="hidden" name='104' id="104">
+<input type="hidden" name='105' id="105">
+<input type="hidden" name='106' id="106">
+<input type="hidden" name='107' id="107">
+<input type="hidden" name='108' id="108">
+<input type="hidden" name='109' id="109">
 
             <div class="card-body">  
                 <table border="1" style="width:100%;" id="backtable">
@@ -105,7 +115,7 @@
                     <tr style="padding:5px;" id="{{$subject->id}}" name="{{$subject->id}}">
                         {{-- <th>{{$i}}</th> --}}
                         <th>
-                            
+                            <input type="hidden" name="concurrent{{$i}}" id="concurrent{{$i}}" value="{{$subject->id}}">
                                
                             @php
                                 $concurrent = App\Models\Subject::where('id' , $subject->concurrent_id)->first();
@@ -122,6 +132,7 @@
                         <td>Concurrent Subject (Remove if you dont have back in this subject)</td>
                         <th style="text-align: cemter; color:red"><p style="text-align: center" onclick="removeconcurrent('{{$subject->id}}')">&#10008;</p></th>
                     </tr>
+
                    
                     @endif
                    
