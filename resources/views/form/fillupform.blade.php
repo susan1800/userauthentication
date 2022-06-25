@@ -26,40 +26,36 @@
                     </div>
 
                 
-                            <div class="card-body">  
+                        <div class="card-body">  
+                                
+                                   
+                               
+
+                            <label for="changeprofilepic" class="custom-file-upload">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="signinSrEmail">Image <small></small></label>
-                                    <div class="col-md-8">
-                                        <div class="input-group" data-toggle="aizuploader" data-type="image">
-                                            <div class="input-group-prepend">
-                                                <div for="formimage" class="input-group-text bg-soft-secondary font-weight-medium" >Browse</div>
-                                            </div>
-                                            <div  class="form-control file-amount">Choose File</div>
-                                            <input id="formimage" type="file" name="image" class="selected-files"  style="display: none;">
-                                           
+                                    <div class="input-group" data-toggle="aizuploader">
+                                        <div class="input-group-prepend">
+                                            <div for="imageselect" class="input-group-text bg-soft-secondary font-weight-medium" >Browse</div>
                                         </div>
-                                        <div class="file-preview box sm">
-                                        </div>
-                                        <small class="text-muted">(size less than 250kb)</small>
+                                        <div id="showimagename" for="imageselect" class="form-control ">Choose File</div>
                                     </div>
                                 </div>
-                            </div>                
-..
-                     
-                
-               
+                            </label>
+                            <input id="changeprofilepic" name="formimage" type="file" style="display:none;" onchange="showimage(this)" required/>
+                           
+                        </div>                
                     <div class="card-body">
                         <div class="form-group mb-3">
                             <label for="name">
                                 Name
                             </label>
-                            <input type="text" name="name" class="form-control" placeholder="Full Name" autofocus>
+                            <input type="text" name="name" class="form-control" placeholder="Full Name" autofocus value="{{old('name')}}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="registration number">
                                 University Registration number
                             </label>
-                            <input type="text" name="registration_no" class="form-control" placeholder="Eg: 2019-1-10-0123">
+                            <input type="text" name="registration_no" class="form-control" placeholder="Eg: 2019-1-10-0123" value="{{old('registration_no')}}" required>
                         </div>
                    
 
@@ -67,7 +63,7 @@
                             <label for="program">
                                 Program
                             </label>
-                            <select name="program" id="program" class="form-control aiz-selectpicker" data-selected-text-format="count" data-live-search="true" data-placeholder="Choose Attributes" onchange="getSubject()">
+                            <select name="program" id="program" class="form-control aiz-selectpicker" data-selected-text-format="count" data-live-search="true" data-placeholder="Choose Attributes" onchange="getSubject()" required>
                                 <option> Select Program</option>
                                 @foreach ($programs as $program)
                                 <option value="{{$program->id}}"> {{$program->program}}</option>
@@ -80,7 +76,7 @@
                             <label for="level">
                                 Level
                             </label>
-                            <select id="level" name="level" class="form-control form-control aiz-selectpicker" onchange="selectexamrollno(); getSubject()" data-live-search="true">
+                            <select id="level" name="level" class="form-control form-control aiz-selectpicker" onchange="selectexamrollno(); getSubject()" data-live-search="true" required>
                                 <option value=""> Select level</option>
                                 @foreach ($levels as $level)
                                 <option value="{{$level->id}}"> {{$level->level}}</option>
@@ -106,14 +102,14 @@
                             <label for="examrollno">
                                 Exam Roll Number
                             </label>
-                            <input type="text" name="examrollno" class="form-control" placeholder="Eg: 18120050">
+                            <input type="text" name="examrollno" class="form-control" placeholder="Eg: 18120050" value="{{old('examrollno')}}">
                         </div>
 
                         <div class="form-group mb-3" >
                             <label for="year">
                                Year
                             </label>
-                            <select class="form-control">
+                            <select class="form-control" name="year" required>
                                 <option>Select Year</option>
                                 @foreach ($times as $time)
                                     <option value="{{$time}}">{{$time}}</option>
@@ -132,11 +128,6 @@
                         <input type="hidden" id="signature" name="signature">
                         
                     </div>
-                    <div id="sig" ></div>
-
-                        
-                        
-
 
                     </div>
                 </div>
@@ -193,7 +184,11 @@
 </div>
 
 </div>
-
+<script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js" integrity="sha256-W+ivNvVjmQX6FTlF0S+SCDMjAuTVNKzH16+kQvRWcTg=" crossorigin="anonymous"></script>
 <script src="{{url('frontend/js/vendors.js')}}"></script>
 <script src="{{ url('frontend/js/core.js')}}"></script>
@@ -239,6 +234,25 @@
     }
   }
 
+
+
+
+
+
+function showimage(event){
+    
+    var image = event.files[0].name; 
+   
+ if(image){
+    var showimage = document.getElementById('showimagename').innerHTML = image;
+    
+
+ }
+
+
+
+
+}
 </script>
 
 

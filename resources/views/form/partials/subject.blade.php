@@ -25,21 +25,24 @@
                 
                 @foreach ($subjects as $subject)
                 <tr id="">
-                    <th><input type ="hidden" name = '{{$i}}' value = '{{$subject->id}}'/><p>{{$i}}</p></th>
+                    <th><input type ="hidden" name = '{{$i}}' id="{{$i}}" value = '{{$subject->id}}'/><p>{{$i}}</p></th>
                     <th>
                         @if (!empty($subject->barrier_id))
                         @php
                         $barrier = App\Models\Subject::where('id' , $subject->barrier_id)->first();
                         
-                        $i++;
-                    @endphp
+                       
+                        @endphp
                             <select class="form-control" onchange="selectbarrier()" id="getregularorbarrier">
-                                <option>Select Regular or Barrier subject</option>
-                                
+                               
+                                <option value="{{$subject->subject_code}}" selected>{{$subject->subject}}</option>
                                 <option value="{{$barrier->subject_code}}">{{$barrier->subject}}</option>
-                                <option value="{{$subject->subject_code}}">{{$subject->subject}}</option>
+                                
                             </select>
-                            <th id="regularorbarriercode"></th>
+                            <input type="hidden" id="{{$barrier->subject_code}}" value="{{$barrier->id}}">
+                            <input type="hidden" id="{{$subject->subject_code}}" value="{{$subject->id}}">
+                            <input type="hidden" id="barrierid" value="{{$i}}">
+                            <th id="regularorbarriercode">{{$subject->subject_code}}</th>
                         @else
                             {{$subject->subject}}
                             <th>{{$subject->subject_code}}</th>
@@ -126,15 +129,31 @@
 
 <script>
 
+
+function selectbarrier(){
+        var code = document.getElementById('getregularorbarrier').value;
+        var subjectid = document.getElementById(code).value;
+        var id = document.getElementById('barrierid').value;
+        alert("This is Barrier subject , are you sure to change it ?")
+        document.getElementById('regularorbarriercode').innerHTML=code;
+        document.getElementById(id).value = subjectid;
+        
+    }
+
     function removeconcurrent(rowid){
         if(confirm("This is concurrent subject , are you sure to remove ?")){
  
         var table = document.getElementById('backtable');
-	var rowCount = table.rows.length;
-	if(rowCount > '1'){
-		var row = table.deleteRow(rowCount-1);
-		rowCount--;
-	}
+	// var rowCount = table.rows.length;
+    // var row = $(this).closest("tr"); 
+    // alert(row);
+	// if(rowCount > '0'){
+	// 	var row = table.deleteRow(row);
+	// 	rowCount--;
+	// }
+    var td = event.target.parentNode; 
+      var tr = td.parentNode; // the row to be removed
+      tr.parentNode.removeChild(tr);
 	
 }  
         } 
@@ -144,23 +163,21 @@
         function removeRow(btnName) {  
     try {  
         var table = document.getElementById('backtable');
-	var rowCount = table.rows.length;
-	if(rowCount > '1'){
-		var row = table.deleteRow(rowCount-1);
-		rowCount--;
-	}
+	// var rowCount = table.rows.length;
+    // var row = $(this).closest("tr"); 
+	// if(rowCount > '0'){
+	// 	var row = table.deleteRow(row);
+	// 	rowCount--;
+	// }
+    var td = event.target.parentNode; 
+      var tr = td.parentNode; // the row to be removed
+      tr.parentNode.removeChild(tr);
     } catch (e) {  
         alert(e);  
     }  
 } 
         
-    function selectbarrier(){
-        var code = document.getElementById('getregularorbarrier').value;
-        
-        if(confirm("This is Barrier subject , are you sure to change it ?")){
-        document.getElementById('regularorbarriercode').innerHTML=code;
-        }
-    }
+
     function addbackrow(){
         var table = document.getElementById('backtable');
         var level = document.getElementById('level').value;
