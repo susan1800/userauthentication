@@ -9,7 +9,10 @@ function showsignature() {
     var imageData = canvas.toDataURL();
     document.getElementsByName("signature")[0].setAttribute("value", imageData);
 
+
 }
+
+// var sign = $('#signature_pad').signature({ syncField: '#signature', syncFormat: 'PNG' });
 
 
 

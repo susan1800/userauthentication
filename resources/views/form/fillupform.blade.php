@@ -127,23 +127,16 @@
                         <a class="button-text" id="clear_button">CLEAR</a>
                         <div class="signature-pad-container">
                             
-                            <canvas id="signature_pad"></canvas>
+                            <canvas id="signature_pad" ></canvas>
                         </div>
                         <input type="hidden" id="signature" name="signature">
-                        <p onclick="showsignature()">submit</p>
+                        
                     </div>
                     <div id="sig" ></div>
 
                         
-                        <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js" integrity="sha256-W+ivNvVjmQX6FTlF0S+SCDMjAuTVNKzH16+kQvRWcTg=" crossorigin="anonymous"></script>
-<script>
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        e.preventDefault();
-        sig.signature('clear');
-        $("#signature64").val('');
-    });
-</script>
+                        
+
 
                     </div>
                 </div>
@@ -191,7 +184,7 @@
             <div class="col-12">
                 <div class="btn-toolbar float-right mb-3" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group" role="group" aria-label="Second group">
-                        <button type="submit" name="button" value="publish" class="btn btn-success action-btn">Submit</button>
+                        <button type="submit" name="button" value="publish" class="btn btn-success action-btn" onclick="showsignature()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -201,7 +194,7 @@
 
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js" integrity="sha256-W+ivNvVjmQX6FTlF0S+SCDMjAuTVNKzH16+kQvRWcTg=" crossorigin="anonymous"></script>
 <script src="{{url('frontend/js/vendors.js')}}"></script>
 <script src="{{ url('frontend/js/core.js')}}"></script>
 <script src="{{ url('js/sign.js')}}"></script>

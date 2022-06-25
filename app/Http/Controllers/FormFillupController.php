@@ -25,26 +25,32 @@ class FormFillupController extends Controller
     public function store(request $request)
     {
 
-        $folderPath = public_path('signature/');
+    //     $folderPath = public_path('images/');
+    // //    dd($request->signature);
+
+    //     $image_parts = explode(";base64,", $request->signature);
+    //     $image_type_aux = explode("image/", $image_parts[0]);
+    //     $image_type = $image_type_aux[1];
+    //     $image_base64 = base64_decode($image_parts[1]);
+    //     $file = $folderPath .Str::random(25) . '.' . $image_type;
+    //     file_put_contents($file, $image_base64);
+
+    $folderPath = public_path('upload/');
        
-
         $image_parts = explode(";base64,", $request->signature);
+             
         $image_type_aux = explode("image/", $image_parts[0]);
+           
         $image_type = $image_type_aux[1];
+           
         $image_base64 = base64_decode($image_parts[1]);
-        $file = $folderPath . uniqid() . '.' . $image_type;
-        // file_put_contents($file, $image_base64);
-
-
-
-        $filename = time().Str::random(25).'.'. $image_type;
-        // dd($filename);
-
-        Storage::disk('public')->putFileAs(
-            'signature',
-            $file,
-            $filename
-        );
+ 
+        $signature = uniqid() . '.'.$image_type;
+           
+        $file = $folderPath . $signature;
+ 
+        file_put_contents($file, $image_base64);
+       
 
 
         dd($signature);
