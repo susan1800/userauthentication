@@ -22,8 +22,8 @@ class SubjectController extends Controller
             if($level->level == "third semester"){
                 $third = $level->id;
             }
-            if($level->level == "forth semester"){
-                $forth = $level->id;
+            if($level->level == "fourth semester"){
+                $fourth = $level->id;
             }
             if($level->level == "fifth semester"){
                 $fifth = $level->id;
@@ -44,7 +44,7 @@ class SubjectController extends Controller
 
 
         $level = Level::find($request->levelid);
-        if($level->value == "1"){
+        if($level->level == "first semester"){
             $allsubjects = [];
         }
         elseif($level->level == "second semester"){
@@ -53,8 +53,8 @@ class SubjectController extends Controller
         elseif($level->level == "third semester"){
             $allsubjects = Subject::where('program_id' , $request->programid)->where('level_id' , '<' , $third)->get();
         }
-        elseif($level->level == "forth semester"){
-            $allsubjects = Subject::where('program_id' , $request->programid)->Where('level_id' , '<' , $forth)->get();
+        elseif($level->level == "fourth semester"){
+            $allsubjects = Subject::where('program_id' , $request->programid)->Where('level_id' , '<' , $fourth)->get();
         }
         elseif($level->level == "fifth semester"){
             $allsubjects = Subject::where('program_id' , $request->programid)->Where('level_id' , '<' , $fifth)->get();

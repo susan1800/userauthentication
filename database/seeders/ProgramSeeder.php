@@ -13,7 +13,7 @@ class ProgramSeeder extends Seeder
      */
     protected $programs = [
         [
-            'program'                       =>  'information technology',
+            'program'                       =>  'Information Technology',
             'departnment'                   =>  'ICT',
         ],
         [
@@ -26,11 +26,11 @@ class ProgramSeeder extends Seeder
         ],
         [
             'program'                       =>  'Civil',
-            'departnment'                   =>  'civil',
+            'departnment'                   =>  'Civil',
         ],
         [
-            'program'                       =>  'architecture',
-            'departnment'                   =>  'architecture',
+            'program'                       =>  'Architecture',
+            'departnment'                   =>  'Architecture',
         ],
         [
             'program'                       =>  'BBA',

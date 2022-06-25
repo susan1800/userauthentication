@@ -10,7 +10,7 @@
         </h5>
         
     </div>
-
+ 
 
             <div class="card-body">  
                 <table border="1" style="width:100%;">
@@ -24,8 +24,8 @@
                 @endphp
                 
                 @foreach ($subjects as $subject)
-                <tr id="{{$subject->concorrents}}">
-                    <th><p>{{$i}}</p></th>
+                <tr id="">
+                    <th><input type ="hidden" name = '{{$i}}' value = '{{$subject->id}}'/><p>{{$i}}</p></th>
                     <th>
                         @if (!empty($subject->barrier_id))
                         @php
@@ -101,21 +101,24 @@
                     @endphp
                     
                     @foreach ($subjects as $subject)
-                    @if (!empty($subject->concorrent_id))
+                    @if (!empty($subject->concurrent_id))
                     <tr style="padding:5px;" id="{{$subject->id}}" name="{{$subject->id}}">
                         {{-- <th>{{$i}}</th> --}}
                         <th>
                             
                                
                             @php
-                                $concorrent = App\Models\Subject::where('id' , $subject->concorrent_id)->first();
+                                $concurrent = App\Models\Subject::where('id' , $subject->concurrent_id)->first();
                                 
                                 $i++;
                             @endphp
                                 
-                           {{$concorrent->subject}} 
+                           {{$concurrent->subject}} 
                         </th>
-                        <th>{{$concorrent->subject_code}}</th>
+                        <th>{{$concurrent->subject_code}}
+
+                        <!-- <input type="hidden" name="{{$i}}" id="" value="{{$concurrent->id}}"> -->
+                        </th>
                         <td>Concurrent Subject (Remove if you dont have back in this subject)</td>
                         <th style="text-align: cemter; color:red"><p style="text-align: center" onclick="removeconcurrent('{{$subject->id}}')">&#10008;</p></th>
                     </tr>
@@ -204,7 +207,7 @@ document.getElementById("choice_form").onkeypress = function(e) {
         
         cell1.innerHTML = "<br>"+subject+"</br>";
         cell2.innerHTML = "<br>"+code+"</br>";
-        cell3.innerHTML = "Concurrent Subject (Remove if you dont have back in this subject)";
+        cell3.innerHTML = "retake";
        
         var cell4 = row.insertCell(4); 
         var rowCount = table.rows.length;  

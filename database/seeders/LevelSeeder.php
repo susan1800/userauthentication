@@ -26,7 +26,7 @@ class LevelSeeder extends Seeder
         ],
         [
            
-            'level'                       =>  'forth semester',
+            'level'                       =>  'fourth semester',
         ],
         [
            
@@ -34,7 +34,7 @@ class LevelSeeder extends Seeder
         ],
         [
            
-            'level'                       =>  'xixth semester',
+            'level'                       =>  'sixth semester',
         ],
         [
            
@@ -43,6 +43,18 @@ class LevelSeeder extends Seeder
         [
            
             'level'                       =>  'eighth semester',
+        ],
+        [
+           
+            'level'                       =>  'ninth semester',
+        ],
+        [
+           
+            'level'                       =>  'tenth semester',
+        ],
+        [
+           
+            'level'                       =>  'Passover',
         ],
     ];
     public function run()

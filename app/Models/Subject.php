@@ -13,7 +13,7 @@ class Subject extends Model
         'subject',
         'subject_code',
         'barrier_id',
-        'concorrent_id',
+        'concurrent_id',
         'credit_hours',
         'level_id',
         'program_id',
@@ -43,13 +43,13 @@ class Subject extends Model
     {
         return $this->hasOne(Subject::class, 'barrier_id')->with('barriers');
     }
-    public function concorrents()
+    public function concurrents()
     {
-        return $this->belongsTo(Subject::class, 'concorrent_id');
+        return $this->belongsTo(Subject::class, 'concurrent_id');
     }
 
-    public function childrenconcorrent()
+    public function childrenconcurrent()
     {
-        return $this->hasMany(Subject::class, 'concorrent_id')->with('concorrents');
+        return $this->hasMany(Subject::class, 'concurrent_id')->with('concurrents');
     }
 }

@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="{{ url('frontend/style.css') }}">
 <link rel="stylesheet" href="{{ url('frontend/core.css') }}">
+<link rel="stylesheet" href="{{ url('public/css/sign.css') }}">
 
 <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +13,7 @@
    <a href="{{route('userlogout')}}"><h5 class="btn btn-primary action-btn " style="float: right;">Logout</h5></a>
 </div>
 
-    <form class="form form-horizontal mar-top" action="products.store" method="POST" enctype="multipart/form-data" id="choice_form">
+    <form class="form form-horizontal mar-top" action="{{route('store')}}" method="POST" enctype="multipart/form-data" id="choice_form">
         @csrf
         <div class="row gutters-5">
             <div class="col-lg-4">
@@ -33,8 +34,9 @@
                                             <div class="input-group-prepend">
                                                 <div for="formimage" class="input-group-text bg-soft-secondary font-weight-medium" >Browse</div>
                                             </div>
-                                            <div  class="form-control file-amount">hoose File</div>
+                                            <div  class="form-control file-amount">Choose File</div>
                                             <input id="formimage" type="file" name="image" class="selected-files"  style="display: none;">
+                                           
                                         </div>
                                         <div class="file-preview box sm">
                                         </div>
@@ -42,7 +44,7 @@
                                     </div>
                                 </div>
                             </div>                
-
+..
                      
                 
                
@@ -120,6 +122,18 @@
                         </div>
 
 
+                        <!-- signature -->
+
+
+                        <div class="signature-pad-container">
+                            <a class="button-text" id="clear_button">CLEAR</a>
+                            <canvas id="signature_pad"></canvas>
+                        </div>
+
+                        <a class="button button-primary" id="finish_button">Finish</a>
+                        <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js" integrity="sha256-W+ivNvVjmQX6FTlF0S+SCDMjAuTVNKzH16+kQvRWcTg=" crossorigin="anonymous"></script>
+
+
                     </div>
                 </div>
 
@@ -179,6 +193,7 @@
 
 <script src="{{url('frontend/js/vendors.js')}}"></script>
 <script src="{{ url('frontend/js/core.js')}}"></script>
+<script src="{{ url('public/js/sign.js')}}"></script>
 
 <script>
 

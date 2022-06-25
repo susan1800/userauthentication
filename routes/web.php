@@ -50,6 +50,8 @@ Route::middleware(['userlogin'])->group(function () {
     // Route:: view('/' , 'form.fillupform')->name('user');
     Route::get('/', [FormFillupController::class, 'index'])->name('user');
     Route::post('/getsubject', [SubjectController::class, 'getSubject'])->name('getsubject');
+    // Route::post('/store', [FormFillupController::class, 'store'])->name('store');
+    Route::post('/store', [FormFillupController::class, 'store'])->name('store');
 });
 
 
