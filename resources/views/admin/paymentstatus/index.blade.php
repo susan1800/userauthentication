@@ -245,6 +245,7 @@ function changeformstatus(event){
                    
                     toastMixin.fire({
                       animation: true,
+                      position: 'bottom',
                       title: '  status has been updated successfully !',
                       icon: 'success'
                     });
@@ -253,6 +254,7 @@ function changeformstatus(event){
                   else{
                     toastMixin.fire({
                       animation: true,
+                      position: 'bottom',
                       title: 'Something wrong please try again !',
                       icon: 'error'
                     });
