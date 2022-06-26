@@ -101,4 +101,8 @@ class RegisterController extends BaseController
             return 0;
         }
     }
+
+
+
+    //php artisan key:generate
 }

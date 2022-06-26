@@ -13,10 +13,25 @@ class PaymentStatusController extends BaseController
         $payments = PaymentStatus::leftJoin('users', 'users.roll_no', '=', 'payment_statuses.roll_no')
         ->get(['users.*', 'payment_statuses.*']);
         $this->setPageTitle('payment status', 'payment status');
+        $this->setFlashMessage('update sucessfully', 'success');
+        
         return view('/admin/paymentstatus/index' , compact('payments'));
-    }
+    } 
     public function changeFormStatus(Request $request){
+       
+        $status = PaymentStatus::find($request->rollno);
+        if($status->approve_form == '0'){
+        $status['approve_form']='1';
+        }
+        else{
+            $status['approve_form']='0';
+        }
+        $result = $status->save();
+        if($result){
         return 1;
+        }else{
+            return 0;
+        }
     }
 
    

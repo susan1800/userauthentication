@@ -97,7 +97,7 @@ input:checked + .slider:before {
                                             </td>
                                             <td class="border px-4 py-2">
                                                 <label class="switch">
-                                                    <input type="checkbox" checked onchange="changeformstatus(this)" value="">
+                                                    <input type="checkbox" onchange="changeformstatus(this)" >
                                                     <span class="slider round"></span>
                                                   </label>
                                             </td>
@@ -212,40 +212,53 @@ input:checked + .slider:before {
 
 @endsection
 
-@section('script')
-
 
 <script>
   function changeformstatus(event){
- 
- var rollno = event.value;
- $.post('{{ route('changepaymentformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
-               {
-                 console.log(data);
-                 if(data == 1){
-                   document.getElementById('showhiddenmessage').style.display="block";
-                   setTimeout(function(){ 
-                     document.getElementById('showhiddenmessage').style.display="none"; 
-                   }, 3000);
-                   
-                   document.getElementById('showalertmessage').innerHTML="Status Updated successfully !";
-                   document.getElementById('showalerterrormessage').innerHTML="";
-                   // alert('success');
-                   // $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
-                 }
-                 else{
-                   // alert('error');
-                   document.getElementById('showhiddenmessage').style.display="block";
-                   document.getElementById('showalertmessage').innerHTML="";
-                   document.getElementById('showalerterrormessage').innerHTML="";
-                   // $('#search-content').html(data);  
-                 }
-             });
-}
+   
+   var toastMixin = Swal.mixin({
+     toast: true,
+     icon: 'success',
+     title: 'General Title',
+     animation: false,
+     position: 'top-right',
+     showConfirmButton: false,
+     timer: 5000,
+     timerProgressBar: true,
+     didOpen: (toast) => {
+       toast.addEventListener('mouseenter', Swal.stopTimer)
+       toast.addEventListener('mouseleave', Swal.resumeTimer)
+     }
+   });
+  
+   var rollno = event.value;
+   $.post('{{ route('changepaymentformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
+                 {
+                   console.log(data);
+                   if(data == 1){
+                    
+                     toastMixin.fire({
+                       animation: true,
+                       title: '  status has been updated successfully !',
+                       icon: 'success'
+                     });
+                     
+                   }
+                   else{
+                     toastMixin.fire({
+                       animation: true,
+                       title: 'Something wrong please try again !',
+                       icon: 'error'
+                     });
+                   }
+               });
+  }
+  
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+@section('script')
 
-function closethis(ev){
-
-}
-</script>
 
 @endsection

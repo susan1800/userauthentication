@@ -125,21 +125,38 @@ input:checked + .slider:before {
                         </div>
                     </div>
                     <!--/Grid Form-->
+                    
 
-<div style="position: fixed;bottom:5; " >
-  <div class="alert alert-success alert-dismissible wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s" role="alert" id="showhiddenmessage" style="display:none; width:300px; ">
-    <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;" onclick="closethis('showhiddenmessage')"><strong>x</strong></button>
-    <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
-</div>
-<div class="alert alert-danger alert-dismissible" role="alert" id="showhiddenerrmessage" style=" display:none; width:300px;">
-  <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;"><strong>x</strong></button>
-  <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
-</div>
-</div>
-
-@endsection
 <script>
+
+
+// document.querySelector(".first").addEventListener('click', function(){
+  
+// });
+
+// document.querySelector(".second").addEventListener('click', function(){
+//   toastMixin.fire({
+//     animation: true,
+//     title: 'Signed in Successfully'
+//   });
+// });
+
+// document.querySelector(".third").addEventListener('click', function(){
+//   toastMixin.fire({
+//     title: 'Wrong Password',
+//     icon: 'error'
+//   });
+// });
+</script>
+
+
+
+ @endsection
+ <script>
+  
    $(document).ready(function() {
+
+      
 $('#search').on('keyup', function(){
             
             search();
@@ -177,6 +194,7 @@ $('#search').on('keyup', function(){
                   console.log(data);
                   if(data == 1){
                     $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
+                    
                   }
                   else{
                     $('#search-content').html(data);  
@@ -203,33 +221,48 @@ $('#search').on('keyup', function(){
 
 function changeformstatus(event){
  
+
+  var toastMixin = Swal.mixin({
+    toast: true,
+    icon: 'success',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+
   var rollno = event.value;
   $.post('{{ route('changepaymentformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
                 {
                   console.log(data);
                   if(data == 1){
-                    document.getElementById('showhiddenmessage').style.display="block";
-                    setTimeout(function(){ 
-                      document.getElementById('showhiddenmessage').style.display="none"; 
-                    }, 3000);
+                   
+                    toastMixin.fire({
+                      animation: true,
+                      title: '  status has been updated successfully !',
+                      icon: 'success'
+                    });
                     
-                    document.getElementById('showalertmessage').innerHTML="Status Updated successfully !";
-                    document.getElementById('showalerterrormessage').innerHTML="";
-                    // alert('success');
-                    // $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
                   }
                   else{
-                    // alert('error');
-                    document.getElementById('showhiddenmessage').style.display="block";
-                    document.getElementById('showalertmessage').innerHTML="";
-                    document.getElementById('showalerterrormessage').innerHTML="";
-                    // $('#search-content').html(data);  
+                    toastMixin.fire({
+                      animation: true,
+                      title: 'Something wrong please try again !',
+                      icon: 'error'
+                    });
                   }
               });
 }
 
-function closethis(ev){
-
-}
 </script>
-@section('script')  @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@section('script') 
+
+@endsection
