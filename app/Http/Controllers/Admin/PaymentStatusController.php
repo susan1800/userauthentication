@@ -15,6 +15,9 @@ class PaymentStatusController extends BaseController
         $this->setPageTitle('payment status', 'payment status');
         return view('/admin/paymentstatus/index' , compact('payments'));
     }
+    public function changeFormStatus(Request $request){
+        return 1;
+    }
 
    
 }

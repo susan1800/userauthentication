@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FormDataController;
 use App\Http\Controllers\Admin\PaymentStatusController;
 use App\Http\Controllers\Admin\SearchController;
+
+
 use App\Http\Controllers;
 
 Route::middleware(['adminlogin'])->group(function () {
@@ -23,6 +25,7 @@ Route::middleware(['adminlogin'])->group(function () {
     });
 
     Route::post('search', [SearchController::class, 'search'])->name('searchajax');
+    Route::post('/changepaymentformstatus', [PaymentStatusController::class, 'changeFormStatus'])->name('changepaymentformstatus');
 
 });
 

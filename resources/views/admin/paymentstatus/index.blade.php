@@ -109,17 +109,11 @@ input:checked + .slider:before {
                                                 <label class="switch">
                                                     <input type="checkbox" @if ($payment->approve_form == 1)
                                                     checked
-                                                    @endif >
+                                                    @endif  onchange="changeformstatus(this)" value="{{$payment->id}}">
                                                     <span class="slider round"></span>
                                                   </label>
                                             </td>
-                                            {{-- <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td> --}}
+                                            
                                         </tr>
                                         @endforeach
                                         
@@ -132,7 +126,16 @@ input:checked + .slider:before {
                     </div>
                     <!--/Grid Form-->
 
-
+<div style="position: fixed;bottom:5; " >
+  <div class="alert alert-success alert-dismissible wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s" role="alert" id="showhiddenmessage" style="display:none; width:300px; ">
+    <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;" onclick="closethis('showhiddenmessage')"><strong>x</strong></button>
+    <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
+</div>
+<div class="alert alert-danger alert-dismissible" role="alert" id="showhiddenerrmessage" style=" display:none; width:300px;">
+  <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;"><strong>x</strong></button>
+  <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
+</div>
+</div>
 
 @endsection
 <script>
@@ -196,5 +199,37 @@ $('#search').on('keyup', function(){
     }
 });
 
+
+
+function changeformstatus(event){
+ 
+  var rollno = event.value;
+  $.post('{{ route('changepaymentformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
+                {
+                  console.log(data);
+                  if(data == 1){
+                    document.getElementById('showhiddenmessage').style.display="block";
+                    setTimeout(function(){ 
+                      document.getElementById('showhiddenmessage').style.display="none"; 
+                    }, 3000);
+                    
+                    document.getElementById('showalertmessage').innerHTML="Status Updated successfully !";
+                    document.getElementById('showalerterrormessage').innerHTML="";
+                    // alert('success');
+                    // $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
+                  }
+                  else{
+                    // alert('error');
+                    document.getElementById('showhiddenmessage').style.display="block";
+                    document.getElementById('showalertmessage').innerHTML="";
+                    document.getElementById('showalerterrormessage').innerHTML="";
+                    // $('#search-content').html(data);  
+                  }
+              });
+}
+
+function closethis(ev){
+
+}
 </script>
 @section('script')  @endsection

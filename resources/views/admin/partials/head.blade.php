@@ -15,4 +15,5 @@
       <link rel="stylesheet" type="text/css" href="/css/main.css" />
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="{{url('backend/css/font-awesome.min.css')}}"/>
+      <link rel="stylesheet" type="text/css" href="{{url('css/owl.css')}}"/>
 

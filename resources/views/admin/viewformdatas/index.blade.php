@@ -97,7 +97,7 @@ input:checked + .slider:before {
                                             </td>
                                             <td class="border px-4 py-2">
                                                 <label class="switch">
-                                                    <input type="checkbox" checked>
+                                                    <input type="checkbox" checked onchange="changeformstatus(this)" value="">
                                                     <span class="slider round"></span>
                                                   </label>
                                             </td>
@@ -109,7 +109,7 @@ input:checked + .slider:before {
 
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="border px-4 py-2">Rickey Ponting 180102</td>
                                             <td class="border px-4 py-2">Sydney</td>
                                             <td class="border px-4 py-2">MS</td>
@@ -192,15 +192,60 @@ input:checked + .slider:before {
                                                         <i class="fas fa-edit"></i></a>
 
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <!--/Grid Form-->
- 
+ <div style="position: fixed;bottom:5; " >
+  <div class="alert alert-success alert-dismissible wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s" role="alert" id="showhiddenmessage" style="display:none; width:300px; ">
+    <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;" onclick="closethis('showhiddenmessage')"><strong>x</strong></button>
+    <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
+</div>
+<div class="alert alert-danger alert-dismissible" role="alert" id="showhiddenerrmessage" style=" display:none; width:300px;">
+  <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;"><strong>x</strong></button>
+  <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
+</div>
+</div>
 
 @endsection
 
-@section('script')  @endsection
+@section('script')
+
+
+<script>
+  function changeformstatus(event){
+ 
+ var rollno = event.value;
+ $.post('{{ route('changepaymentformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
+               {
+                 console.log(data);
+                 if(data == 1){
+                   document.getElementById('showhiddenmessage').style.display="block";
+                   setTimeout(function(){ 
+                     document.getElementById('showhiddenmessage').style.display="none"; 
+                   }, 3000);
+                   
+                   document.getElementById('showalertmessage').innerHTML="Status Updated successfully !";
+                   document.getElementById('showalerterrormessage').innerHTML="";
+                   // alert('success');
+                   // $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
+                 }
+                 else{
+                   // alert('error');
+                   document.getElementById('showhiddenmessage').style.display="block";
+                   document.getElementById('showalertmessage').innerHTML="";
+                   document.getElementById('showalerterrormessage').innerHTML="";
+                   // $('#search-content').html(data);  
+                 }
+             });
+}
+
+function closethis(ev){
+
+}
+</script>
+
+@endsection

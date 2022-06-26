@@ -7,6 +7,7 @@ use App\Http\Controllers\User\VerificationController;
 use App\Http\Controllers\User\LogoutController;
 use App\Http\Controllers\FormFillupController;
 use App\Http\Controllers\SubjectController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +53,7 @@ Route::middleware(['userlogin'])->group(function () {
     Route::post('/getsubject', [SubjectController::class, 'getSubject'])->name('getsubject');
     // Route::post('/store', [FormFillupController::class, 'store'])->name('store');
     Route::post('/store', [FormFillupController::class, 'store'])->name('store');
+   
 });
 
 

@@ -118,7 +118,7 @@ class LoginController extends BaseController
 
     private function checkPaymentStatus($roll_no){
         $status = PaymentStatus::where('roll_no' , $roll_no)->get();
-        if($status[0]->status == 1){
+        if($status[0]->approve_form == 1){
             return true;
         }
         else{
