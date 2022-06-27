@@ -87,6 +87,7 @@ class VerificationController extends BaseController
                 $returnPaymentStatus = $this->checkPaymentStatus($users[0]->roll_no);
                 if($returnPaymentStatus == true){
                 $request->session()->put('testuserlogin','yes');
+                $request->session()->put('sessionuseridcosmos',$user[0]->id);
                 // echo "user is user";
                 return redirect()->route('user' );
                 }

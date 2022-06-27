@@ -16,6 +16,7 @@ class CreatePaymentStatusesTable extends Migration
         Schema::create('payment_statuses', function (Blueprint $table) {
             $table->id();
             $table->integer('roll_no')->unique();
+            $table->string('name');
             $table->boolean('status')->default('0');
             $table->boolean('approve_form')->default('0');
             $table->timestamps();

@@ -18,7 +18,6 @@ class PaymentStatusController extends BaseController
         return view('/admin/paymentstatus/index' , compact('payments'));
     } 
     public function changeFormStatus(Request $request){
-       
         $status = PaymentStatus::find($request->rollno);
         if($status->approve_form == '0'){
         $status['approve_form']='1';

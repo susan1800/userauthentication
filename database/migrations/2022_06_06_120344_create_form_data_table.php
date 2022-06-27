@@ -15,6 +15,7 @@ class CreateFormDataTable extends Migration
     {
         Schema::create('form_data', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('registration_no');
             $table->integer('exam_roll_no');
             $table->integer('college_roll_no');

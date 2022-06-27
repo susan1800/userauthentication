@@ -97,14 +97,14 @@
                         $i=1;
                     @endphp
                     
-                    @foreach ($subjects as $subject)
-                    @if (!empty($subject->concurrent_id))
-                    <tr style="padding:5px;" id="{{$subject->id}}" name="{{$subject->id}}">
+                    @foreach ($subjects as $concurrentsubject)
+                    @if (!empty($concurrentsubject->concurrent_id))
+                    <tr style="padding:5px;" id="{{$concurrentsubject->id}}" name="{{$concurrentsubject->id}}">
                         <th>
-                            <input type="hidden" name="15{{$i}}" id="concurrent{{$i}}" value="{{$subject->id}}">
+                            <input type="hidden" name="15{{$i}}" id="concurrent{{$i}}" value="{{$concurrentsubject->concurrent_id}}">
                                
                             @php
-                                $concurrent = App\Models\Subject::where('id' , $subject->concurrent_id)->first();
+                                $concurrent = App\Models\Subject::where('id' , $concurrentsubject->concurrent_id)->first();
                                 $i++;
                             @endphp
                                 

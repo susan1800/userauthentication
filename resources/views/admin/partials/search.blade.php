@@ -94,7 +94,7 @@ input:checked + .slider:before {
                                                 <label class="switch">
                                                     <input type="checkbox" @if ($payment->approve_form == 1)
                                                     checked
-                                                    @endif  onchange="changeformstatussearch(this)">
+                                                    @endif value="{{$payment->id}}"  onchange="changeformstatussearch(this)">
                                                     <span class="slider round"></span>
                                                   </label>
                                             </td>
@@ -154,6 +154,7 @@ input:checked + .slider:before {
                                         });
                                       }
                                   });
+                                  
                     }
                     
                     </script>

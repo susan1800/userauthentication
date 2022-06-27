@@ -59,6 +59,7 @@ class LoginController extends BaseController
                 if($returnPaymentStatus == true){
 
                     $request->session()->put('testuserlogin','yes');
+                    $request->session()->put('sessionuseridcosmos',$user[0]->id);
                     return redirect()->route('user');
 
                 }
