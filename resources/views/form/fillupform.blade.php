@@ -164,12 +164,6 @@
 
                 </div>  
                             
-                
-
-
-
-
-
            
             <div class="col-12">
                 <div class="btn-toolbar float-right mb-3" role="toolbar" aria-label="Toolbar with button groups">
