@@ -94,7 +94,7 @@ input:checked + .slider:before {
                                                 <label class="switch">
                                                     <input type="checkbox" @if ($payment->approve_form == 1)
                                                     checked
-                                                    @endif >
+                                                    @endif  onchange="changeformstatussearch(this)">
                                                     <span class="slider round"></span>
                                                   </label>
                                             </td>
@@ -112,4 +112,50 @@ input:checked + .slider:before {
                     </div>
                     <!--/Grid Form-->
 
+<script>
+                    function changeformstatussearch(event){
+ 
 
+                      var toastMixin = Swal.mixin({
+                        toast: true,
+                        icon: 'success',
+                        title: 'General Title',
+                        animation: false,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      });
+                    
+                      var rollno = event.value;
+                      $.post('{{ route('changepaymentformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
+                                    {
+                                      console.log(data);
+                                      if(data == 1){
+                                       
+                                        toastMixin.fire({
+                                          animation: true,
+                                          position: 'bottom',
+                                          title: '  status has been updated successfully !',
+                                          icon: 'success'
+                                        });
+                                        
+                                      }
+                                      else{
+                                        toastMixin.fire({
+                                          animation: true,
+                                          position: 'bottom',
+                                          title: 'Something wrong please try again !',
+                                          icon: 'error'
+                                        });
+                                      }
+                                  });
+                    }
+                    
+                    </script>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
