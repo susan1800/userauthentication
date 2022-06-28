@@ -26,7 +26,13 @@
                           @else
                           <i class="fas fa-times text-red-500 mx-2"></i>
                           @endif
-                         
+                          <label class="switch" style="float: right;">
+                            <input type="checkbox" @if ($formdata->payment == 1)
+                              checked 
+                              
+                            @endif value="{{$formdata->id}}" onchange="changeformpaymentstatus(this)" >
+                            <span class="slider round"></span>
+                          </label>
                            
                         </td>
                         <td class="border px-4 py-2">
