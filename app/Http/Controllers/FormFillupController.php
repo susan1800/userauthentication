@@ -38,7 +38,7 @@ if($request->signature == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS4AAAC
 
     return redirect()->back()->withInput($request->input());
 }
-// dd($request);
+  
 
     $folderPath = public_path('upload/');
        

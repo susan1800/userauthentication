@@ -24,8 +24,10 @@ Route::middleware(['adminlogin'])->group(function () {
        });
     });
 
+    Route::post('searchajaxform', [SearchController::class, 'formSearch'])->name('searchajaxform');
     Route::post('search', [SearchController::class, 'search'])->name('searchajax');
     Route::post('/changepaymentformstatus', [PaymentStatusController::class, 'changeFormStatus'])->name('changepaymentformstatus');
+    Route::post('/changeapproveformstatus', [FormDataController::class, 'changeFormStatus'])->name('changeapproveformstatus');
+    Route::post('/changeformpaymentstatus', [FormDataController::class, 'changeFormPaymentStatus'])->name('changeformpaymentstatus');
 
 });
-

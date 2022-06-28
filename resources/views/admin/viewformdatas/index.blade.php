@@ -71,36 +71,58 @@ input:checked + .slider:before {
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
                                 Full Table
+                                
+                                <div style="padding-left:10px; display:inline-flex">
+                                  <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded">Export SVG</button>
+                              </div>
                                 <div style="float: right; display:inline-flex">
-                                    <input type="search" style=" border-radius: 20px; box-shadow: 2px 2px #888888; padding:5px;" placeholder="Search ...">
+                                    <input type="search" onclick="search()" onkeyup="search()" onkeydown="search()" id="search" name="search" style=" border-radius: 20px; box-shadow: 2px 2px #888888; padding:5px;" placeholder="Search ...">
                                 </div>
                             </div>
                             <div class="p-3">
                                 <table class="table-responsive w-full rounded">
                                     <thead>
                                       <tr>
+                                       
                                         <th class="border w-1/4 px-4 py-2">Student Name</th>
-                                        <th class="border w-1/6 px-4 py-2">City</th>
-                                        <th class="border w-1/6 px-4 py-2">Course</th>
+                                        <th class="border w-1/6 px-4 py-2">College roll no</th>
                                         <th class="border w-1/6 px-4 py-2">Fee Status</th>
-                                        <th class="border w-1/7 px-4 py-2">Approve Form</th>
+                                        <th class="border w-1/6 px-4 py-2">Approve Form</th>
+                                        <th class="border w-1/4 px-4 py-2">Image</th>
                                         <th class="border w-1/5 px-4 py-2">Actions</th>
                                       </tr>
                                     </thead>
                                     <tbody>
+                                      @foreach ($formDatas as $formdata)
+                                        
                                         <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
-                                            <td class="border px-4 py-2">Sydney</td>
-                                            <td class="border px-4 py-2">MS</td>
+                                            <td class="border px-4 py-2">{{$formdata->name}}</td>
+                                            <td class="border px-4 py-2">{{$formdata->college_roll_no}}</td>
                                             <td class="border px-4 py-2">
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
+                                              @if ($formdata->payment == 1)
+                                              <i class="fas fa-check text-green-500 mx-2"></i>
+                                              @else
+                                              <i class="fas fa-times text-red-500 mx-2"></i>
+                                              @endif
+                                              <label class="switch" style="float: right;">
+                                                <input type="checkbox" @if ($formdata->payment == 1)
+                                                  checked 
+                                                  
+                                                @endif value="{{$formdata->id}}" onchange="changeformpaymentstatus(this)" >
+                                                <span class="slider round"></span>
+                                              </label>
+                                               
                                             </td>
                                             <td class="border px-4 py-2">
                                                 <label class="switch">
-                                                    <input type="checkbox" onchange="changeformstatus(this)" >
+                                                    <input type="checkbox" @if ($formdata->approve == 1)
+                                                      checked 
+                                                      
+                                                    @endif value="{{$formdata->id}}" onchange="changeformstatus(this)" >
                                                     <span class="slider round"></span>
                                                   </label>
                                             </td>
+                                            <td class="border px-4 py-2"><img src ="{{asset('storage/'.$formdata->image)}}" style="height:100px;"></td>
                                             <td class="border px-4 py-2">
                                                 <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
                                                         <i class="fas fa-eye"></i></a>
@@ -109,111 +131,89 @@ input:checked + .slider:before {
 
                                             </td>
                                         </tr>
-                                        {{-- <tr>
-                                            <td class="border px-4 py-2">Rickey Ponting 180102</td>
-                                            <td class="border px-4 py-2">Sydney</td>
-                                            <td class="border px-4 py-2">MS</td>
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked>
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
-                                            <td class="border px-4 py-2">Sydney</td>
-                                            <td class="border px-4 py-2">MS</td>
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox">
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
-                                            <td class="border px-4 py-2">Sydney</td>
-                                            <td class="border px-4 py-2">MS</td>
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-times text-red-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox">
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border px-4 py-2">Micheal Clarke 180101</td>
-                                            <td class="border px-4 py-2">Sydney</td>
-                                            <td class="border px-4 py-2">MS</td>
-                                            <td class="border px-4 py-2">
-                                                <i class="fas fa-times text-red-500 mx-2"></i>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked>
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
-
-                                            </td>
-                                        </tr> --}}
+                                        @endforeach
+                                       
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <!--/Grid Form-->
- <div style="position: fixed;bottom:5; " >
-  <div class="alert alert-success alert-dismissible wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s" role="alert" id="showhiddenmessage" style="display:none; width:300px; ">
-    <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;" onclick="closethis('showhiddenmessage')"><strong>x</strong></button>
-    <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
-</div>
-<div class="alert alert-danger alert-dismissible" role="alert" id="showhiddenerrmessage" style=" display:none; width:300px;">
-  <button class="close" type="button" data-dismiss="alert" style="font-size: 15px; margin-top:-15px; text-decoration:bold;"><strong>x</strong></button>
-  <strong id="showalertmessage" style="width: 300px; font-size:13px;"></strong> 
-</div>
-</div>
+
 
 @endsection
 
 
 <script>
+
+
+$(document).ready(function() {
+
+      
+$('#search').on('keyup', function(){
+            
+            search();
+        });
+
+        $('#search').on('focus', function(){
+            search();
+           
+        });
+      });
+
+        function search(){
+          
+
+            // var searchKey = $('#search').val();
+            var searchKey = document.getElementById('search').value;
+          
+            var modal = document.getElementById("myModal");
+            
+            if(searchKey.length > 2){
+                // Get the modal
+                
+
+                  // Get the <span> element that closes the modal
+                  var span = document.getElementsByClassName("close00")[0];
+
+                  // When the user clicks on <span> (x), close the modal
+                  span.onclick = function() {
+                    modal.style.display = "none";
+                  }
+                  modal.style.display = "block";
+
+                  $.post('{{ route('searchajaxform') }}', {_token:'{{ csrf_token() }}',  search:searchKey}, function(data)
+                {
+                  console.log(data);
+                  if(data == 1){
+                    $('#search-content').html('Sorry, nothing found for Roll No : <b>"'+searchKey+'"</b>'); 
+                    
+                  }
+                  else{
+                    $('#search-content').html(data);  
+                  }
+              });
+            }
+            else {
+              
+              modal.style.display = "none";
+             
+                
+            }
+           
+        }
+        
+    $(document).ready(function() {
+     var modal = document.getElementById("myModal00");
+     window.onclick = function(event) {
+        modal.style.display = "none";                  
+    }
+});
+
+
+
+
+
   function changeformstatus(event){
    
    var toastMixin = Swal.mixin({
@@ -221,7 +221,7 @@ input:checked + .slider:before {
      icon: 'success',
      title: 'General Title',
      animation: false,
-     position: 'top-right',
+     position: 'top-left',
      showConfirmButton: false,
      timer: 5000,
      timerProgressBar: true,
@@ -232,13 +232,14 @@ input:checked + .slider:before {
    });
   
    var rollno = event.value;
-   $.post('{{ route('changepaymentformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
+   $.post('{{ route('changeapproveformstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
                  {
                    console.log(data);
                    if(data == 1){
                     
                      toastMixin.fire({
                        animation: true,
+                       position: 'bottom-left',
                        title: '  status has been updated successfully !',
                        icon: 'success'
                      });
@@ -247,7 +248,54 @@ input:checked + .slider:before {
                    else{
                      toastMixin.fire({
                        animation: true,
-                       title: 'Something wrong please try again !',
+                       position: 'bottom-left',
+                       title: 'Form already accepted  !',
+                       icon: 'error'
+                     });
+                   }
+               });
+  }
+
+
+
+
+  function changeformpaymentstatus(event){
+   
+   var toastMixin = Swal.mixin({
+     toast: true,
+     icon: 'success',
+     title: 'General Title',
+     animation: false,
+     position: 'top-left',
+     showConfirmButton: false,
+     timer: 5000,
+     timerProgressBar: true,
+     didOpen: (toast) => {
+       toast.addEventListener('mouseenter', Swal.stopTimer)
+       toast.addEventListener('mouseleave', Swal.resumeTimer)
+     }
+   });
+  
+   var rollno = event.value;
+   $.post('{{ route('changeformpaymentstatus') }}', {_token:'{{ csrf_token() }}',  rollno:rollno}, function(data)
+                 {
+                   console.log(data);
+                   if(data == 1){
+                    
+                     toastMixin.fire({
+                       animation: true,
+                       position: 'bottom-left',
+                       title: '  status has been updated successfully !',
+                       icon: 'success'
+                     });
+                     location.reload();
+                     
+                   }
+                   else{
+                     toastMixin.fire({
+                       animation: true,
+                       position: 'bottom-left',
+                       title: 'Form already accepted  !',
                        icon: 'error'
                      });
                    }
@@ -255,6 +303,9 @@ input:checked + .slider:before {
   }
   
   </script>
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   

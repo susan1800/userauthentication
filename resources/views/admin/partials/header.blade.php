@@ -8,9 +8,9 @@ model box
   position: fixed; /* Stay in place */
   z-index: 2; /* Sit on top */
   float:right;
-  margin-top: 150px;
+  margin-top: 70px;
   width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  height: 80%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background: #d9dadb;
 
@@ -45,7 +45,7 @@ model box
   cursor: pointer;
 }
 </style>
-<header class="bg-nav">
+<header class="bg-nav" style="position: fixed; width:100%; margin-bottom:80px; z-index:3;">
             <div class="flex justify-between">
                 <div class="p-1 mx-3 inline-flex items-center">
                     <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
@@ -54,12 +54,12 @@ model box
                 <div class="p-1 flex flex-row items-center">
 
 
-
-                    <a href="#" onmouseover="profileToggle()" onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block">Adam Wathan ></a>
-                    <a href="#" onmouseover="profileToggle()" onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block" style="margin-right:50px"></a>
+                  <a href="#" class="text-white p-2 no-underline hidden md:block lg:block"><img src="{{url('/backend/image/notification.png')}}" style="border-radius:50%; width:40px;height:40px; margin-left:20px;"></a>
+                    <a href="#"  onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block"><img src="{{url('/backend/image/profile.jpeg')}}" style="border-radius:50%; width:40px;height:40px; margin-left:20px;"></a>
+                    <a href="#"  class="text-white p-2 no-underline hidden md:block lg:block" style="margin-right:50px"></a>
                     <div id="ProfileDropDown" class="rounded hidden shadow-md bg-white absolute pin-t mt-12 mr-1 pin-r" style="margin-top:200px; margin-right: 150px; ">
                         <ul class="list-reset " >
-                          <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Notifications</a></li>
+                          
                           <li><hr class="border-t mx-2 border-grey-ligght"></li>
                           <li><a href="{{route('adminlogout')}}" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Logout</a></li>
                         </ul>
@@ -67,6 +67,7 @@ model box
                 </div>
             </div>
         </header>
+        <div style="margin-top: 80px;">
         <div id="myModal" class="modal00">
 
             <!-- Modal content -->
@@ -78,3 +79,14 @@ model box
           
           </div>
         <!--/Header-->
+<script>
+  function profileToggle() {
+           
+    var profileDropdown = document.getElementById('ProfileDropDown').style;
+    if (profileDropdown.display == "none") {
+        profileDropdown.display = "block";
+    } else {
+        profileDropdown.display = "none";
+    }
+}
+        </script>

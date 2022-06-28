@@ -8,24 +8,17 @@ function sidebarToggle() {
     }
 }
 
-var profileDropdown = document.getElementById('ProfileDropDown');
 
-function profileToggle() {
-    if (profileDropdown.style.display === "none") {
-        profileDropdown.style.display = "block";
-    } else {
-        profileDropdown.style.display = "none";
-    }
-}
+
+
 
 
 /**
  * ### Modals ###
  */
 
-function toggleModal(action, elem_trigger)
-{
-    elem_trigger.addEventListener('click', function () {
+function toggleModal(action, elem_trigger) {
+    elem_trigger.addEventListener('click', function() {
         if (action == 'add') {
             let modal_id = this.dataset.modal;
             document.getElementById(`${modal_id}`).classList.add('modal-is-open');
@@ -39,13 +32,12 @@ function toggleModal(action, elem_trigger)
 
 
 // Check if there is modals on the page
-if (document.querySelector('.modal-wrapper'))
-{
+if (document.querySelector('.modal-wrapper')) {
     // Open the modal
     document.querySelectorAll('.modal-trigger').forEach(btn => {
         toggleModal('add', btn);
     });
-    
+
     // close the modal
     document.querySelectorAll('.close-modal').forEach(btn => {
         toggleModal('remove', btn);
@@ -53,30 +45,30 @@ if (document.querySelector('.modal-wrapper'))
 }
 
 
-(function () {
-	"use strict";
+(function() {
+    "use strict";
 
-	var treeviewMenu = $('.app-menu');
+    var treeviewMenu = $('.app-menu');
 
-	// Toggle Sidebar
-	$('[data-toggle="sidebar"]').click(function(event) {
-		event.preventDefault();
-		$('.app').toggleClass('sidenav-toggled');
-	});
+    // Toggle Sidebar
+    $('[data-toggle="sidebar"]').click(function(event) {
+        event.preventDefault();
+        $('.app').toggleClass('sidenav-toggled');
+    });
 
-	// Activate sidebar treeview toggle
-	$("[data-toggle='treeview']").click(function(event) {
-		event.preventDefault();
-		if(!$(this).parent().hasClass('is-expanded')) {
-			treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
-		}
-		$(this).parent().toggleClass('is-expanded');
-	});
+    // Activate sidebar treeview toggle
+    $("[data-toggle='treeview']").click(function(event) {
+        event.preventDefault();
+        if (!$(this).parent().hasClass('is-expanded')) {
+            treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
+        }
+        $(this).parent().toggleClass('is-expanded');
+    });
 
-	// Set initial active toggle
-	$("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+    // Set initial active toggle
+    $("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
 
-	//Activate bootstrip tooltips
-	$("[data-toggle='tooltip']").tooltip();
+    //Activate bootstrip tooltips
+    $("[data-toggle='tooltip']").tooltip();
 
 })();

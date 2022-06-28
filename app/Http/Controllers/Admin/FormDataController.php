@@ -4,11 +4,43 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
-
+use App\Models\FormData;
+use Mail;
 class FormDataController extends BaseController
 {
     public function index(){
+        $formDatas = FormData::get();
         $this->setPageTitle('view form', 'view form');
-        return view('/admin/viewformdatas/index');
+        return view('/admin/viewformdatas/index' , compact('formDatas'));
+    }
+    public function changeFormStatus(Request $request){
+        $id = $request->rollno;
+        $status = FormData::find($id);
+        if($status->approve != 1){
+            $status->approve = 1;
+            $status->save();
+            $details = [
+                'title' => 'Cosmos College of Management and Technology ',
+                'body' => "Your form is Accepted ",
+                'message'=>'Please contact to Administrater for any query !',
+                'contact'=>'015550878 , 015151350',
+            ];
+            \Mail::to($status->user->email)->send(new \App\Mail\FormApproveMessage($details));
+            return 1;
+        }
+        return 0;
+        
+    }
+    public function changeFormPaymentStatus(Request $request){
+        $id = $request->rollno;
+        $status = FormData::find($id);
+        if($status->payment != 1){
+        $status->payment = 1;
+        }
+        else{
+            $status->payment = 0;
+        }
+        $status->save();
+        return 1;
     }
 }
