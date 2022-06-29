@@ -10,8 +10,7 @@ use App\Models\NotificationCount;
 class PaymentStatusController extends BaseController
 {
     public function index(){
-        $payments = PaymentStatus::leftJoin('users', 'users.roll_no', '=', 'payment_statuses.roll_no')
-        ->get(['users.*', 'payment_statuses.*']);
+        $payments = PaymentStatus::orderBy('roll_no', 'DESC')->get();
         $this->setPageTitle('payment status', 'payment status');
         $this->setFlashMessage('update sucessfully', 'success');
         $notification = NotificationCount::first();

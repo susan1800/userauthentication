@@ -17,20 +17,18 @@ class FormDataController extends BaseController
         return view('/admin/viewformdatas/index' , compact('formDatas' , 'notification'));
     }
     public function changeFormStatus(Request $request){
-        $notification = NotificationCount::first();
-        $id = $request->rollno;
-        $status = FormData::find($id);
+        $status = FormData::find($request->rollno);
         if($status->approve != 1){
             $status->approve = 1;
             $status->save();
-            $details = [
-                'title' => 'Cosmos College of Management and Technology ',
-                'body' => "Your form is Accepted ",
-                'message'=>'Please contact to Administrater for any query !',
-                'contact'=>'015550878 , 015151350',
-            ];
-            \Mail::to($status->user->email)->send(new \App\Mail\FormApproveMessage($details));
-            return 1;
+            $mailStatus = $this->mail($status->user->email);
+            if($mailStatus == 1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+            
         }
         return 0;
         
@@ -46,6 +44,21 @@ class FormDataController extends BaseController
         }
         $status->save();
         return 1;
+    }
+    private function mail($email){
+        $details = [
+            'title' => 'Cosmos College of Management and Technology ',
+            'body' => "Your form is Accepted ",
+            'message'=>'Please contact to Administrater for any query !',
+            'contact'=>'015550878 , 015151350',
+        ];
+        $mail = \Mail::to($email)->send(new \App\Mail\FormApproveMessage($details));
+        if($mail){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
     
 }

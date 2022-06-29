@@ -84,7 +84,7 @@ model box
 setInterval(function () {
   $.get('{{ route('notificationcount') }}',  function(data)
     {
-      console.log(data);
+      // console.log(data);
       if(data == '00'){
       }
       else{
@@ -92,6 +92,7 @@ setInterval(function () {
       }
     });
     
-}, 3000);
+}, 1000);
+
 
         </script>

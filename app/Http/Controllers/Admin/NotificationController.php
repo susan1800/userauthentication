@@ -23,4 +23,12 @@ class NotificationController extends BaseController
             return $notificationcount->count;
         }
     }
+    public function NotificationCountSetZero(){
+        // dd('fgh');
+        $notificationcount = NotificationCount::first();
+        $notificationcount = NotificationCount::find($notificationcount->id);
+        $notificationcount->count = '0';
+        $notificationcount->save();
+        
+    }
 }
