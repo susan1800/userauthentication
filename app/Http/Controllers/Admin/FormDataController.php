@@ -9,7 +9,7 @@ use Mail;
 class FormDataController extends BaseController
 {
     public function index(){
-        $formDatas = FormData::get();
+        $formDatas = FormData::latest()->get();
         $this->setPageTitle('view form', 'view form');
         return view('/admin/viewformdatas/index' , compact('formDatas'));
     }

@@ -31,6 +31,7 @@ class CreateFormDataTable extends Migration
             $table->integer('credit_hours');
             $table->boolean('approve')->default('0');
             $table->string('payment_remarks');
+            $table->boolean('seen')->default('0');
             $table->boolean('status')->default('0');
             $table->timestamps();
 

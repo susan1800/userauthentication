@@ -12,6 +12,17 @@ function sidebarToggle() {
 
 
 
+function profileToggle() {
+
+    var profileDropdown = document.getElementById('ProfileDropDown').style;
+    if (profileDropdown.display == "none") {
+        profileDropdown.display = "block";
+    } else {
+        profileDropdown.display = "none";
+    }
+}
+
+
 
 /**
  * ### Modals ###

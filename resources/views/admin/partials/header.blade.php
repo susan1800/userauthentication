@@ -54,14 +54,15 @@ model box
                 <div class="p-1 flex flex-row items-center">
 
 
-                  <a href="#" class="text-white p-2 no-underline hidden md:block lg:block"><img src="{{url('/backend/image/notification.png')}}" style="border-radius:50%; width:40px;height:40px; margin-left:20px;"></a>
-                    <a href="#"  onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block"><img src="{{url('/backend/image/profile.jpeg')}}" style="border-radius:50%; width:40px;height:40px; margin-left:20px;"></a>
+                  <a href="#" class="text-white p-2 no-underline hidden md:block lg:block"> <div style="margin-bottom:-30px; background:red; width:30px; border-radius:50%; padding:2px; text-align:center; position:fixed;"><b>99</b></div><img src="{{url('/backend/image/notification.png')}}" style="border-radius:50%; width:40px;height:40px; margin-left:20px;"></a>
+                    <a href="#"   onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block"><img src="{{url('/backend/image/profile.jpeg')}}" style="border-radius:50%; width:40px;height:40px; margin-left:20px;"></a>
                     <a href="#"  class="text-white p-2 no-underline hidden md:block lg:block" style="margin-right:50px"></a>
                     <div id="ProfileDropDown" class="rounded hidden shadow-md bg-white absolute pin-t mt-12 mr-1 pin-r" style="margin-top:200px; margin-right: 150px; ">
                         <ul class="list-reset " >
                           
-                          <li><hr class="border-t mx-2 border-grey-ligght"></li>
+                          <li></li>
                           <li><a href="{{route('adminlogout')}}" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Logout</a></li>
+                          <li><a href="" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Change Password</a></li>
                         </ul>
                     </div>
                 </div>
@@ -80,13 +81,6 @@ model box
           </div>
         <!--/Header-->
 <script>
-  function profileToggle() {
-           
-    var profileDropdown = document.getElementById('ProfileDropDown').style;
-    if (profileDropdown.display == "none") {
-        profileDropdown.display = "block";
-    } else {
-        profileDropdown.display = "none";
-    }
-}
+
+
         </script>

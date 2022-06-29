@@ -73,7 +73,7 @@ input:checked + .slider:before {
                                 Full Table
                                 
                                 <div style="padding-left:10px; display:inline-flex">
-                                  <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded">Export SVG</button>
+                                  <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded">Export Excel</button>
                               </div>
                                 <div style="float: right; display:inline-flex">
                                     <input type="search" onclick="search()" onkeyup="search()" onkeydown="search()" id="search" name="search" style=" border-radius: 20px; box-shadow: 2px 2px #888888; padding:5px;" placeholder="Search ...">
@@ -96,7 +96,7 @@ input:checked + .slider:before {
                                       @foreach ($formDatas as $formdata)
                                         
                                         <tr>
-                                            <td class="border px-4 py-2">{{$formdata->name}}</td>
+                                            <td class="border px-4 py-2" style=" ">{{$formdata->name}} @if($formdata->seen == 0)<p style="font-size:12px; padding-left:10px; padding-right:10px; padding-top:2px; margin-left:10px; color:white; background:#de7207; width:50px; border-radius:20px; display:inline-flex;">New</p>@endif</td>
                                             <td class="border px-4 py-2">{{$formdata->college_roll_no}}</td>
                                             <td class="border px-4 py-2">
                                               @if ($formdata->payment == 1)
