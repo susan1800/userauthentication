@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FormDataController;
 use App\Http\Controllers\Admin\PaymentStatusController;
 use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\NotificationController;
 
 
 use App\Http\Controllers;
@@ -30,4 +31,10 @@ Route::middleware(['adminlogin'])->group(function () {
     Route::post('/changeapproveformstatus', [FormDataController::class, 'changeFormStatus'])->name('changeapproveformstatus');
     Route::post('/changeformpaymentstatus', [FormDataController::class, 'changeFormPaymentStatus'])->name('changeformpaymentstatus');
 
+
+    Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
+    Route::get('/notificationcount', [NotificationController::class, 'getNotificationCount'])->name('notificationcount');
+    Route::get('/notificationcountsetzero', [NotificationController::class, 'NotificationCountSetZero'])->name('notificationcountsetzero');
+
 });
+

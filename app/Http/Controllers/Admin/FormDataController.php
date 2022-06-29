@@ -6,14 +6,18 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\FormData;
 use Mail;
+use App\Models\NotificationCount;
+use App\Models\Notification;
 class FormDataController extends BaseController
 {
     public function index(){
         $formDatas = FormData::latest()->get();
         $this->setPageTitle('view form', 'view form');
-        return view('/admin/viewformdatas/index' , compact('formDatas'));
+        $notification = NotificationCount::first();
+        return view('/admin/viewformdatas/index' , compact('formDatas' , 'notification'));
     }
     public function changeFormStatus(Request $request){
+        $notification = NotificationCount::first();
         $id = $request->rollno;
         $status = FormData::find($id);
         if($status->approve != 1){
@@ -43,4 +47,5 @@ class FormDataController extends BaseController
         $status->save();
         return 1;
     }
+    
 }

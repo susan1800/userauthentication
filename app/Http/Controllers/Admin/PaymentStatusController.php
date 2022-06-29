@@ -6,7 +6,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\PaymentStatus;
 use App\Models\User;
-
+use App\Models\NotificationCount;
 class PaymentStatusController extends BaseController
 {
     public function index(){
@@ -14,8 +14,8 @@ class PaymentStatusController extends BaseController
         ->get(['users.*', 'payment_statuses.*']);
         $this->setPageTitle('payment status', 'payment status');
         $this->setFlashMessage('update sucessfully', 'success');
-        
-        return view('/admin/paymentstatus/index' , compact('payments'));
+        $notification = NotificationCount::first();
+        return view('/admin/paymentstatus/index' , compact('payments' , 'notification'));
     } 
     public function changeFormStatus(Request $request){
         $status = PaymentStatus::find($request->rollno);
