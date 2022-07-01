@@ -15,6 +15,8 @@ use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use Illuminate\Support\Facades\Storage;
 use App\Models\FormDataSubject;
 use App\Models\FormDataBackSubject;
+use App\Models\Notification;
+use App\Models\NotificationCount;
 class FormFillupController extends BaseController
 {
     public function index(){
@@ -30,52 +32,106 @@ class FormFillupController extends BaseController
 
     public function store(request $request)
     {
+        $this->validate($request, [
+            'name'      =>  'required',
+            'year'      =>  'required',
+            'registration_no'      =>  'required',
+            'program'      =>  'required',
+            'level' =>'required',
+            'formimage' =>  'required|mimes:jpg,jpeg,png',
+            'signature'  => 'required',
+            
+        ]);
         
+    try {
+    if($request->signature == "aa/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS4AAACYCAYAAABapASfAAAAAXNSR0IArs4c6QAABHBJREFUeF7t1AEJAAAMAsHZv/RyPNwSyDncOQIECMQEFssrLgECBM5weQICBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMg8F2bAJlDULv5AAAAAElFTkSuQmCC"){
 
-    //    dd($request);
+        return redirect()->back()->withInput($request->input());
+    }
+    $user_id = $request->session()->get('sessionuseridcosmos');
 
-if($request->signature == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS4AAACYCAYAAABapASfAAAAAXNSR0IArs4c6QAABHBJREFUeF7t1AEJAAAMAsHZv/RyPNwSyDncOQIECMQEFssrLgECBM5weQICBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMg8F2bAJlDULv5AAAAAElFTkSuQmCC"){
-
-    return redirect()->back()->withInput($request->input());
+    $formId = FormData::where('user_id' , $user_id)->first();
+    if($formId){
+        $this->setFlashMessage("You Already submitted Your Form Please contact to administrator for any query !", 'error');
+        return redirect()->back()->withInput($request->input());
+    }
+    
+    $signature = $this->uploadsignature($request->signature);
+if($signature == 0){
+    return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
 }
-  
-
-    $folderPath = public_path('upload/');
-       
-        $image_parts = explode(";base64,", $request->signature);
-             
-        $image_type_aux = explode("image/", $image_parts[0]);
-           
-        $image_type = $image_type_aux[1];
-           
-        $image_base64 = base64_decode($image_parts[1]);
- 
-        $signature = uniqid() . '.'.$image_type;
-           
-        $file = $folderPath . $signature;
- 
-        file_put_contents($file, $image_base64);
-
         $filename = null;
         $uploadedFile = $request->file('formimage');
-        // dd($uploadedFile);
         $filename = time().Str::random(25).'.'. $uploadedFile->getClientOriginalExtension();
-
         Storage::disk('public')->putFileAs(
             'formimage',
             $uploadedFile,
             $filename
         );
+    
        
 
-        $user_id = $request->session()->get('sessionuseridcosmos');
-        
-        $formId = FormData::where('exam_roll_no' , $request->examrollno)->first();
-        if($formId){
-            
-            $this->setFlashMessage("Form Already Submitted in this Roll NO Please try different roll no", 'error');
-            return redirect()->back()->withInput($request->input());
+        if($this->createFormData($request , $user_id , $filename , $signature)==0){
+            return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
         }
+
+        $formId = FormData::where('exam_roll_no' , $request->examrollno)->first();
+        
+        
+       if($this->createRegularSubject($request , $formId['id'])==0){
+        $form = FormData::find($formId);
+        $form->delete();
+        return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+       }
+
+       if($this->createBackSubject($request , $formId['id'])==0){
+        $subjects = FormDataSubject::where('form_id' , $formId['id']);
+        foreach($subjects as $subject){
+            $sub = FormDataSubject::find($subject->id);
+            $sub->delete();
+        }
+        $form = FormData::find($formId);
+        $form->delete();
+        return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+       }
+       if($this->createNotification($formId['id'])==0){
+
+       }
+       if($this->incrementNotificationCount()==0){
+
+       }
+       return $this->responseRedirectBack('Error occurred while creating form.', 'success', true, true);
+    } catch (QueryException $exception) {
+        return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+    }
+    }
+
+    private function uploadsignature($signature){
+        try{
+
+    $folderPath = public_path('upload/');
+       
+    $image_parts = explode(";base64,", $signature);
+         
+    $image_type_aux = explode("image/", $image_parts[0]);
+       
+    $image_type = $image_type_aux[1];
+       
+    $image_base64 = base64_decode($image_parts[1]);
+
+    $signature = uniqid() . '.'.$image_type;
+       
+    $file = $folderPath . $signature;
+
+    file_put_contents($file, $image_base64);
+    return $signature;
+} catch (QueryException $exception) {
+    return 0;
+}
+    }
+
+    private function createFormData($request , $user_id , $filename , $signature){
+        try{
         $user = User::find($user_id);
         
         $student= new FormData;
@@ -94,31 +150,65 @@ if($request->signature == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS4AAAC
         $student->credit_hours = 0;
         $student->payment_remarks = " ";
         $student->payment_image = " ";
-
-        // dd($student);
         $student-> save();
+        return 1;
+    } catch (QueryException $exception) {
+        return 0;
+    }
+    }
 
-        $formId = FormData::where('exam_roll_no' , $request->examrollno)->first();
-        
-        
-        for($i=1;$i<9;$i++){
+
+    private function createRegularSubject($request , $formId){
+        try{
+                for($i=1;$i<9;$i++){
             if($request[$i] != null){
                 
                 $regularSubject = new FormDataSubject;
-                $regularSubject->form_data_id = $formId->id;
+                $regularSubject->form_data_id = $formId;
                 $regularSubject->subject_id = $request[$i];
                 
                 $regularSubject->save();
             }
         }
+        return 1;
+    } catch (QueryException $exception) {
+        return 0;
+    }
+    }
+    private function createBackSubject($request , $formId){
+        try{
         for($i=150;$i<250;$i++){
             if($request[$i] != null){
                 $backSubject = new FormDataBackSubject;
-                $backSubject->form_data_id = $formId->id;
+                $backSubject->form_data_id = $formId;
                 $backSubject->subject_id = $request[$i];
                 $backSubject->save();
-                dd($request[$i]);
+               
             }
         }
+        return 1;
+    } catch (QueryException $exception) {
+        return 0;
+    }
+    }
+    private function createNotification($formId){
+        try{
+        $notification = new Notification;
+        $notification->form_id = $formId;
+        $notification->save();
+        return 1;
+    } catch (QueryException $exception) {
+        return 0;
+    }
+    }
+    private function incrementNotificationCount(){
+        try{
+        $notificationcount = NotificationCount::first();
+        $notificationcount->count += 1;
+        $notificationcount->save();
+        return 1;
+    } catch (QueryException $exception) {
+        return 0;
+    }
     }
 }

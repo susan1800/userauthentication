@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class NotificationCount extends Model
 {
     use HasFactory;
+    protected $table = "notification_counts";
+    protected $fillable = [
+        'count',
+    ];
 }

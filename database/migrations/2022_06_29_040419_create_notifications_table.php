@@ -15,9 +15,10 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger('form_id');
-            $table->unsignedBigInteger('user_id');
+            $table->boolean('seen')->default('0');
+            $table->timestamps();
+            
         });
     }
 

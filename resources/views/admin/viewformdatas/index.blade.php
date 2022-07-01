@@ -96,7 +96,7 @@ input:checked + .slider:before {
                                       @foreach ($formDatas as $formdata)
                                         
                                         <tr>
-                                            <td class="border px-4 py-2" style=" ">{{$formdata->name}} @if($formdata->seen == 0)<p style="font-size:12px; padding-left:10px; padding-right:10px; padding-top:2px; margin-left:10px; color:white; background:#de7207; width:50px; border-radius:20px; display:inline-flex;">New</p>@endif</td>
+                                            <td class="border px-4 py-2" style=" ">{{$formdata->name}} @if($formdata->seen == 0)<p style="font-size:12px; padding-left:10px; padding-right:10px; padding-top:2px; padding-bottom:2px; margin-left:10px; color:white; background:#de7207; width:50px; border-radius:4px; display:inline-flex;">New</p>@endif</td>
                                             <td class="border px-4 py-2">{{$formdata->college_roll_no}}</td>
                                             <td class="border px-4 py-2">
                                               @if ($formdata->payment == 1)

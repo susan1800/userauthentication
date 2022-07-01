@@ -37,4 +37,5 @@ Route::middleware(['adminlogin'])->group(function () {
     Route::get('/notificationcountsetzero', [NotificationController::class, 'NotificationCountSetZero'])->name('notificationcountsetzero');
 
 });
+Route::get('/clear-cache', [DashboardController::class , 'clearCache'])->name('cache.clear');
 

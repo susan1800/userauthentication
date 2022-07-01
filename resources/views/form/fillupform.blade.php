@@ -159,6 +159,7 @@
 
                 
                             <div class="card-body">  
+                                @include('partials.flash')
                             </div>
                 </div>
 
@@ -168,7 +169,7 @@
             <div class="col-12">
                 <div class="btn-toolbar float-right mb-3" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group" role="group" aria-label="Second group">
-                        <button type="submit" name="button" value="publish" class="btn btn-success action-btn" onclick="showsignature()">Submit</button>
+                        <button type="submit" name="button" value="publish" class="btn btn-success action-btn" onclick="showsignature(); return showsubmitalert();">Submit</button>
                     </div>
                 </div>
             </div>
@@ -242,6 +243,14 @@ function showimage(event){
 
  }
 
+ function showsubmitalert(){
+if(confirm('are you sure to confirm ? Please check again to make sure !')){
+    return true;
+}
+else{
+    return false;
+}
+ }
 
 
 

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\NotificationCount;
+use Artisan;
+use Cache;
+
 class DashboardController extends BaseController
 {
     public function index(){
@@ -18,4 +21,11 @@ class DashboardController extends BaseController
     $this->setPageTitle('dashboard', 'dashboard');
         return view('/admin/dashboard/index' , compact('notification'));
         }
+
+
+        function clearCache(Request $request)
+    {
+        Artisan::call('cache:clear');
+        return "Cache cleared successfully";
+    }
 }
