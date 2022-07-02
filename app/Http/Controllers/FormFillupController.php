@@ -17,6 +17,8 @@ use App\Models\FormDataSubject;
 use App\Models\FormDataBackSubject;
 use App\Models\Notification;
 use App\Models\NotificationCount;
+use Illuminate\Support\Facades\Crypt;
+
 class FormFillupController extends BaseController
 {
     public function index(){
@@ -51,10 +53,10 @@ class FormFillupController extends BaseController
     $user_id = $request->session()->get('sessionuseridcosmos');
 
     $formId = FormData::where('user_id' , $user_id)->first();
-    if($formId){
-    //     $this->setFlashMessage("You Already submitted Your Form Please contact to administrator for any query !", 'error');
-        return $this->responseRedirectBack('You Already submitted Your Form Please contact to administrator for any query !', 'error', true, true)->withInput($request->input());
-    }
+    // if($formId){
+    // //     $this->setFlashMessage("You Already submitted Your Form Please contact to administrator for any query !", 'error');
+    //     return $this->responseRedirectBack('You Already submitted Your Form Please contact to administrator for any query !', 'error', true, true)->withInput($request->input());
+    // }
     
     $signature = $this->uploadsignature($request->signature);
 if($signature == 0){
@@ -102,6 +104,11 @@ if($signature == 0){
        }
 
 
+
+       $totalfee = 2500 + $backSubject*300;
+       $totalfee = $hashcode =Crypt::encryptString($totalfee);
+      
+       return redirect()->route('payment.showpaymentmethod' , compact('totalfee'));
 
        
 
