@@ -44,21 +44,21 @@ class FormFillupController extends BaseController
         ]);
         
     try {
-    if($request->signature == "aa/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS4AAACYCAYAAABapASfAAAAAXNSR0IArs4c6QAABHBJREFUeF7t1AEJAAAMAsHZv/RyPNwSyDncOQIECMQEFssrLgECBM5weQICBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMg8F2bAJlDULv5AAAAAElFTkSuQmCC"){
+    if($request->signature == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS4AAACYCAYAAABapASfAAAAAXNSR0IArs4c6QAABHBJREFUeF7t1AEJAAAMAsHZv/RyPNwSyDncOQIECMQEFssrLgECBM5weQICBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMgYLj8AAECOQHDlatMYAIEDJcfIEAgJ2C4cpUJTICA4fIDBAjkBAxXrjKBCRAwXH6AAIGcgOHKVSYwAQKGyw8QIJATMFy5ygQmQMBw+QECBHIChitXmcAECBguP0CAQE7AcOUqE5gAAcPlBwgQyAkYrlxlAhMg8F2bAJlDULv5AAAAAElFTkSuQmCC"){
 
-        return redirect()->back()->withInput($request->input());
+        return $this->responseRedirectBack('Please fill all the details .', 'error', true, true)->withInput($request->input());
     }
     $user_id = $request->session()->get('sessionuseridcosmos');
 
     $formId = FormData::where('user_id' , $user_id)->first();
     if($formId){
-        $this->setFlashMessage("You Already submitted Your Form Please contact to administrator for any query !", 'error');
-        return redirect()->back()->withInput($request->input());
+    //     $this->setFlashMessage("You Already submitted Your Form Please contact to administrator for any query !", 'error');
+        return $this->responseRedirectBack('You Already submitted Your Form Please contact to administrator for any query !', 'error', true, true)->withInput($request->input());
     }
     
     $signature = $this->uploadsignature($request->signature);
 if($signature == 0){
-    return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+    return $this->responseRedirectBack('Error occurred while creating form. Please try again .', 'error', true, true)->withInput($request->input());
 }
         $filename = null;
         $uploadedFile = $request->file('formimage');
@@ -72,7 +72,7 @@ if($signature == 0){
        
 
         if($this->createFormData($request , $user_id , $filename , $signature)==0){
-            return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+            return $this->responseRedirectBack('Error occurred while creating form. Please tyy again.', 'error', true, true)->withInput($request->input());
         }
 
         $formId = FormData::where('exam_roll_no' , $request->examrollno)->first();
@@ -81,10 +81,10 @@ if($signature == 0){
        if($this->createRegularSubject($request , $formId['id'])==0){
         $form = FormData::find($formId);
         $form->delete();
-        return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+        return $this->responseRedirectBack('Error occurred while creating form. Please tyy again.', 'error', true, true)->withInput($request->input());
        }
-
-       if($this->createBackSubject($request , $formId['id'])==0){
+       $backSubject = $this->createBackSubject($request , $formId['id']);
+       if($backSubject==0){
         $subjects = FormDataSubject::where('form_id' , $formId['id']);
         foreach($subjects as $subject){
             $sub = FormDataSubject::find($subject->id);
@@ -92,7 +92,7 @@ if($signature == 0){
         }
         $form = FormData::find($formId);
         $form->delete();
-        return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+        return $this->responseRedirectBack('Error occurred while creating form. Please tyy again.', 'error', true, true)->withInput($request->input());
        }
        if($this->createNotification($formId['id'])==0){
 
@@ -100,9 +100,24 @@ if($signature == 0){
        if($this->incrementNotificationCount()==0){
 
        }
-       return $this->responseRedirectBack('Error occurred while creating form.', 'success', true, true);
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+       return $this->responseRedirectBack('Form submit successfully.', 'success', true, true);
     } catch (QueryException $exception) {
-        return $this->responseRedirectBack('Error occurred while creating form.', 'error', true, true)->withInput($request->input());
+        return $this->responseRedirectBack('Error occurred while creating form.  Please tyy again.', 'error', true, true)->withInput($request->input());
     }
     }
 
@@ -177,16 +192,18 @@ if($signature == 0){
     }
     private function createBackSubject($request , $formId){
         try{
+            $j=0;
         for($i=150;$i<250;$i++){
             if($request[$i] != null){
                 $backSubject = new FormDataBackSubject;
                 $backSubject->form_data_id = $formId;
                 $backSubject->subject_id = $request[$i];
                 $backSubject->save();
+                $j++;
                
             }
         }
-        return 1;
+        return $j;
     } catch (QueryException $exception) {
         return 0;
     }

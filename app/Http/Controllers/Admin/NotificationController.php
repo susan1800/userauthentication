@@ -29,12 +29,17 @@ class NotificationController extends BaseController
         $notificationcount = NotificationCount::find($notificationcount->id);
         $notificationcount->count = '0';
         $notificationcount->save();
+
+        $this->seenNotification();
+        
+        
+    }
+    private function seenNotification(){
         $notifications = Notification::where('seen',0)->get();
         foreach($notifications as $notification){
             $seen = Notification::find($notification->id);
             $seen->seen = 1;
             $seen->save();
         }
-        
     }
 }
