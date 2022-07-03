@@ -121,6 +121,14 @@ if($signature == 0){
 
 
 
+<<<<<<< HEAD
+=======
+        Storage::disk('public')->putFileAs(
+            'signature', 
+            $file,
+            $filename
+        );
+>>>>>>> 95347debf6246f4a723753ec7bf711f80ca597c2
 
        return $this->responseRedirectBack('Form submit successfully.', 'success', true, true);
     } catch (QueryException $exception) {
@@ -141,6 +149,7 @@ if($signature == 0){
        
     $image_base64 = base64_decode($image_parts[1]);
 
+<<<<<<< HEAD
     $signature = uniqid() . '.'.$image_type;
        
     $file = $folderPath . $signature;
@@ -172,6 +181,18 @@ if($signature == 0){
         $student->credit_hours = 0;
         $student->payment_remarks = " ";
         $student->payment_image = " ";
+=======
+        dd($signature);
+        dd($request);
+        $student= new FormFillup;
+        $student-> registration_no= $request['registration_no'];
+        $student-> exam_roll_no= $request['exam_roll_no'];
+        $student-> college_roll_no= $request['college_roll_no'];
+        $student-> user_id= $request['user_id'];
+        $student-> program_id= $request['program_id'];
+        $student-> level_id= $request['level_id'];
+        // $student-> signature= $request['signature'];
+>>>>>>> 95347debf6246f4a723753ec7bf711f80ca597c2
         $student-> save();
         // dd($student);
 
