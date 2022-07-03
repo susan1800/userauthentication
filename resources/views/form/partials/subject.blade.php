@@ -10,7 +10,6 @@
         </h5>
         
     </div>
- 
 
             <div class="card-body">  
                 <table border="1" style="width:100%;">
@@ -113,7 +112,7 @@
                         <th>{{$concurrent->subject_code}}
                         </th>
                         <td>Concurrent Subject (Remove if you dont have back in this subject)</td>
-                        <th style="text-align: cemter; color:red"><p style="text-align: center" onclick="removeconcurrent('{{$subject->id}}')">&#10008;</p></th>
+                        <th class="mousefocus" style="text-align: cemter; color:red"><p style="text-align: center" onclick="removeconcurrent('{{$subject->id}}')">&#10008;</p></th>
                     </tr>
 
                    
@@ -124,11 +123,7 @@
                     </table>
             </div>
 </div>
-
-
-
 <script>
-
 
 function selectbarrier(){
         var code = document.getElementById('getregularorbarrier').value;
@@ -175,8 +170,7 @@ function selectbarrier(){
     } catch (e) {  
         alert(e);  
     }  
-} 
-        
+}        
 
     function addbackrow(){
         var table = document.getElementById('backtable');

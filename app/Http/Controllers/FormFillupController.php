@@ -155,7 +155,7 @@ if($signature == 0){
     private function createFormData($request , $user_id , $filename , $signature){
         try{
         $user = User::find($user_id);
-        
+    //   dd($user);
         $student= new FormData;
         $student->name=$request->name;
         $student->year=$request->year;
@@ -173,6 +173,8 @@ if($signature == 0){
         $student->payment_remarks = " ";
         $student->payment_image = " ";
         $student-> save();
+        // dd($student);
+
         return 1;
     } catch (QueryException $exception) {
         return 0;
