@@ -81,21 +81,25 @@ if($signature == 0){
         
         
        if($this->createRegularSubject($request , $formId['id'])==0){
+        
         $form = FormData::find($formId);
         $form->delete();
         return $this->responseRedirectBack('Error occurred while creating form. Please tyy again.', 'error', true, true)->withInput($request->input());
        }
+     
        $backSubject = $this->createBackSubject($request , $formId['id']);
        if($backSubject==0){
         $subjects = FormDataSubject::where('form_id' , $formId['id']);
         foreach($subjects as $subject){
+            
             $sub = FormDataSubject::find($subject->id);
             $sub->delete();
         }
-        $form = FormData::find($formId);
+        $form = FormData::find($formId['id']);
         $form->delete();
         return $this->responseRedirectBack('Error occurred while creating form. Please tyy again.', 'error', true, true)->withInput($request->input());
        }
+      
        if($this->createNotification($formId['id'])==0){
 
        }
@@ -168,7 +172,6 @@ if($signature == 0){
         $student->image = 'formimage/'.$filename;
         $student->date = Carbon::now()->format('Y-m-d'); 
         $student->signature = $signature;
-
         $student->credit_hours = 0;
         $student->payment_remarks = " ";
         $student->payment_image = " ";
